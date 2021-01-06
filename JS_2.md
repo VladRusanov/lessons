@@ -157,3 +157,19 @@ null == undefined       // true
 null === undefined      // false
 
 ```
+
+# Преобразование типов для объектов
+
+Самое простое — это преобразование в логическое значение: любое значение, не являющееся примитивом, всегда true
+
+```
+const person = {
+ name: 'Vlad'
+};
+
+Boolean(person); // true
+
+const obj = {};
+Boolean(obj); // true
+
+```
