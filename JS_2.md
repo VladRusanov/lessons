@@ -276,8 +276,21 @@ alert(1n + 2); // Error: Cannot mix BigInt and other types
 **Синтааксис**
 
 ```
-function funcName() {
- console.log('Hello World')
+function наименование_функции(аргумент_1, аргумент_2, ..., аргумент_N){
+  тело_функции
 }
+
+```
+
+Вызов функции JavaScript осуществляется по ее имени, за которым следуют круглые скобки с аргументами (если они имеются)
+
+Именно круглые скобки говорят, что функцию необходимо выполнить.
+
+```
+function sayHello() {
+  console.log('Hello World');
+}
+
+sayHello(); // в консоли будет Hello World
 
 ```
