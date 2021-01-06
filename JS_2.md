@@ -188,3 +188,25 @@ console.log(a + ''); // [object Object]
 const b = {};
 console.log(b + 1); // [object Object]1
 ```
+
+Для этого есть стандартные методы js - **toString()** и **valueOf()** :
+
+
+```
+let person = {
+ name: 'Vlad',
+ toString: function () {
+   return 'Hello World!'
+ },
+ valueOf: function () {
+   return 1
+ }
+};
+
+String(person); // 'Hello World!'
+person + 1; // 2
+person + ''; // '1'
+
+```
+
+!!! Обратите внимание на то, что obj + ‘’ возвращает ‘101’ в виде строки. Оператор + вызывает стандартный режим преобразования. Как уже было сказано, Object рассматривает приведение к числу как преобразование по умолчанию, поэтому использует сначала метод valueOf() а не toString().
