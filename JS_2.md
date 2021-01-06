@@ -250,3 +250,21 @@ const sameBigint = BigInt("1234567890123456789012345678901234567890");
 const bigintFromNumber = BigInt(10); // то же самое, что и 10n
 
 ```
+
+
+BigInt можно использовать как обычные числа, к примеру:
+
+```
+console.log(1n + 2n); // 3
+
+console.log(5n / 2n); // 2
+
+```
+
+Но в математических операциях мы не можем смешивать bigint и обычные числа:
+
+```
+alert(1n + 2); // Error: Cannot mix BigInt and other types
+
+
+```
