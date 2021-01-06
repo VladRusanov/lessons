@@ -294,3 +294,7 @@ function sayHello() {
 sayHello(); // в консоли будет Hello World
 
 ```
+
+Давайте напишем функцию, которая будет выводить сумму чисел 1 и 5 в консоль
+
+![help](https://a.d-cd.net/SYAAAgKXiOA-960.jpg)
