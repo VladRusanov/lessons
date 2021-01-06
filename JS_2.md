@@ -148,7 +148,12 @@ Number(Symbol('my symbol'))    // Ошибка TypeError
 
 null == 0               // false, null не преобразуется в 0
 null == null            // true
+null === null           // true
+
 undefined == undefined  // true
+undefined === undefined  // true
+
 null == undefined       // true
+null === undefined      // false
 
 ```
