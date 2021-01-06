@@ -266,5 +266,4 @@ console.log(5n / 2n); // 2
 ```
 alert(1n + 2); // Error: Cannot mix BigInt and other types
 
-
 ```
