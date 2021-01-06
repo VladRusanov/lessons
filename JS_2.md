@@ -118,3 +118,18 @@ Number('123')   // явное преобразование
 true | 0        // неявное преобразование
 
 ```
+
+Вот как в числа преобразуются примитивные значения:
+
+```
+Number(null)         // 0
+Number(undefined)    // NaN
+Number(true)         // 1
+Number(false)        // 0
+Number(" 12 ")       // 12
+Number("-12.34")     // -12.34
+Number("\n")         // 0
+Number(" 12s ")      // NaN
+Number(123)          // 123
+
+```
