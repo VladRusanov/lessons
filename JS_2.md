@@ -133,3 +133,22 @@ Number(" 12s ")      // NaN
 Number(123)          // 123
 
 ```
+
+Значения типа Symbol не могут быть преобразованы в число ни явно, ни неявно
+
+```
+Number(Symbol('my symbol'))    // Ошибка TypeError
++Symbol('123')                 // Ошибка TypeError
+
+```
+
+Вот правила, которые стоит запомнить:
+
+```
+
+null == 0               // false, null не преобразуется в 0
+null == null            // true
+undefined == undefined  // true
+null == undefined       // true
+
+```
