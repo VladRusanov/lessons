@@ -14,9 +14,10 @@
 Например, **alert(value)** преобразует значение к строке.
 
 ```
-cd ~/tmp # change directory: зайти в папку tmp в домашней папке текущего пользователя
-cd       # идем в домашнюю папку
-cd ./    # зайти в эту же папку
-cd ../   # выйти на папку выше.
+let value = true;
+alert(typeof value); // boolean
+
+value = String(value); // теперь value это строка "true"
+alert(typeof value); // string
 
 ```
