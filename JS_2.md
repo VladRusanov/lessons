@@ -181,3 +181,10 @@ let a = {};
 console.log(a + ''); // [object Object]
 
 ```
+
+А если к числу?
+
+```
+const b = {};
+console.log(b + 1); // [object Object]1
+```
