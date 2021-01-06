@@ -303,13 +303,27 @@ sayHello(); // в консоли будет Hello World
 ```
 function sayHello(name) {
  console.log('Hello, ' + name);
-}
+};
 
 sayHello('Vlad'); // в консоли будет Hello, Vlad
 
 ```
 
 - name - аргумент функции sayHello
+
+Аргументы передаем в вызов функции. Можно передевать любое кол-во аргументов.
+
+```
+function sayHello(name, lastName, age) {
+ console.log('Hello, ' + name + ' ' + lastName);
+ console.log('Your age - ' + age)
+};
+
+sayHello('Oleg', 'Popov', 10);
+
+```
+
+В приведенном примере объявляется функция sayHello(), которая принимает три аргумента - name, lastName, age
 
 
 
