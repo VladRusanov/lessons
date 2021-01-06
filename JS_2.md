@@ -21,3 +21,5 @@ value = String(value); // теперь value это строка "true"
 alert(typeof value); // string
 
 ```
+
+Преобразование происходит очевидным образом. false становится "false", null становится "null" и т.п.
