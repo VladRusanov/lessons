@@ -34,3 +34,10 @@ String(false)  // 'false'
 ```
 
 В случае с типом **Symbol** дело несколько усложняется, так как значения этого типа можно преобразовать к строковому типу только явно.
+
+```
+
+String(Symbol('my symbol'))   // 'Symbol(my symbol)'
+'' + Symbol('my symbol')      // ошибка TypeError
+
+```
