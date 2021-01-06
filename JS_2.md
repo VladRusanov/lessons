@@ -173,3 +173,11 @@ const obj = {};
 Boolean(obj); // true
 
 ```
+
+Но что будет, если я хочу привети object к строке?
+
+```
+let a = {};
+console.log(a + ''); // [object Object]
+
+```
