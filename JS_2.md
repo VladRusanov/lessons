@@ -267,3 +267,17 @@ console.log(5n / 2n); // 2
 alert(1n + 2); // Error: Cannot mix BigInt and other types
 
 ```
+
+
+# Функции (function)
+
+В JavaScript функция является особым типом объекта, который позволяет закладывать и применять определенную логику для обработки данных.
+
+**### Синтааксис**
+
+```
+function funcName() {
+ console.log('Hello World')
+}
+
+```
