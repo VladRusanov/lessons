@@ -297,3 +297,19 @@ sayHello(); // в консоли будет Hello World
 
 - Давайте напишем функцию, которая будет выводить сумму чисел 1 и 5 в консоль
 
+
+Рассмотрим пример c аргументами:
+
+```
+function sayHello(name) {
+ console.log('Hello, ' + name);
+}
+
+sayHello('Vlad'); // в консоли будет Hello, Vlad
+
+```
+
+- name - аргумент функции sayHello
+
+
+
