@@ -348,5 +348,37 @@ function printMessage(message){
 
 ```
 
+Функции JavaScript также могут быть анонимными. 
+
+Анонимной называется функция без имени. 
+
+Такие функции используются в качестве callback-ов при обработке событий или присваиваются переменным, которые в дальнейшем передается другим функциями как параметры.
+
+```
+let sayHello = function(name) {
+    console.log('Name is ' + name)
+}
+
+sayHello('Vova');
+
+```
+
+Функция передана в качестве аргумента:
+
+```
+let action = function() {
+    console.log('action')
+}
+
+let doSomething = function(func) {
+    func();
+}
+
+doSomething(action);
+
+```
+
+
+
 
 
