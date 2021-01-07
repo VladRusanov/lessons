@@ -586,6 +586,11 @@ const arr = new Array(5, 4, 3, 2, 1, "тест");
 
 Доступ к элементам массива осуществляется с помощью оператора []. 
 
+```
+массив[индекс]
+
+```
+
 Слева от скобок должна присутствовать ссылка на массив. 
 
 **Внутри скобок должно находиться произвольное выражение, возвращающее неотрицательное целое значение**. 
@@ -744,5 +749,58 @@ console.log(str.replace('Jack', 'Paul')); // Paul is my friend. Jack is a doctor
 ```
 let str = '  String with extra spaces ';
 console.log(str.trim()); // 'String with extra spaces'
+
+```
+
+
+# Использование встроенных методов массива
+
+- toString / join
+
+Метод toString() возвращает массив в виде строки, в которой все его элементы перечислены через запятую.
+
+```
+let arr = [1, 'John', true];
+alert(arr.toString()); // "1,John,true"
+
+```
+
+Метод join() идентичен методу toString() и отличается от него лишь тем, что с его помощью можно задать разделитель, отличный от запятой (по умолчанию).
+
+```
+let arr = [1, 'John', true];
+
+alert(arr.join('.')); // "1.John.true"
+alert(arr.join('|')); // "1|John|true"
+
+```
+
+- unshift / push
+
+В JavaScript методы unshift() и push() используются для добавления в массив новых элементов: unshift() добавляет элемент в начало, push() - в конец
+
+```
+let arr = [2, 3, 4];
+
+arr.unshift(1);
+console.log(arr); // [1,2,3,4]
+
+arr.push(5);
+console.log(arr); // [1,2,3,4,5]
+
+```
+
+- shift / pop
+
+Методы shift() и pop() предназначены для удаления элементов из массива: shift() удаляет первый элемент, pop() - последний. Оба метода возвращают значение удаляемого элемента.
+
+```
+let arr = [1, 2, 3];
+
+let firstElement = arr.shift(); // 1
+console.log(arr); // [2,3]
+
+let lastElement = arr.pop(); // 3
+console.log(arr); // [2]
 
 ```
