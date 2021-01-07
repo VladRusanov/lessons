@@ -542,5 +542,17 @@ let arrowFunc = (a, b) => a + b;
 
 const result = arrowFunc(2, 6);
 // result === 8
+
 ```
 
+Тоже самое что и:
+
+```
+let arrowFunc = (a, b) => {
+  return a + b
+};
+
+const result = arrowFunc(2, 6);
+// result === 8
+
+```
