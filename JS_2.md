@@ -859,3 +859,18 @@ let deletedItems = arr.splice(1, 2); // ['b', 'c']
 console.log(arr); // ['a', 'd', 'e']
 
 ```
+
+- forEach / map
+
+Методы для перебора элементов в массиве.
+Разница между ними в том, то метод map возвращает новій массив, а forEach - нет.
+
+```
+const arr = [1, 2, 3];
+arr.forEach(function(item, i, arr) {
+ console.log(item); // 1, 2, 3
+ console.log(i); // 0, 1, 2
+ console.log(arr); // [1, 2, 3]
+})
+
+```
