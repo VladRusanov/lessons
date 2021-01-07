@@ -871,6 +871,15 @@ arr.forEach(function(item, i, arr) {
  console.log(item); // 1, 2, 3
  console.log(i); // 0, 1, 2
  console.log(arr); // [1, 2, 3]
-})
+});
+
+const newArray = arr.map(function(item, i, arr) {
+ console.log(item); // 1, 2, 3
+ console.log(i); // 0, 1, 2
+ console.log(arr); // [1, 2, 3]
+ return item;
+});
+
+// newArray === [1, 2, 3];
 
 ```
