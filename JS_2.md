@@ -658,6 +658,32 @@ const personName = person.getName(); // 'Vlad'
 
 ```
 
+# Строка JavaScript может рассматриваться как массив символов.
+
+
+```
+let str = 'JavaScript';
+/*
+  str[0] - 'J'
+  str[1] - 'a'
+  str[2] - 'v'
+  str[3] - 'a'
+  str[4] - 'S'
+  str[5] - 'c'
+  str[6] - 'r'
+  str[7] - 'i'
+  str[8] - 'p'
+  str[9] - 't'
+*/
+
+//можно обратиться к любому символу
+console.log(str[4]); //'S'
+
+//можно узнать длину строки
+console.log(str.length); //10
+
+```
+
 # Использование встроенных методов строк
 
 В JavaScript имеется широкий набор методов для работы со строками. 
@@ -665,6 +691,7 @@ const personName = person.getName(); // 'Vlad'
 Рассмотрим наиболее популярные из них:
 
 - toUpperCase() / toLowerCase() - преобразование значения в верхний/нижний регистр;
+
 ```
 let greeting = 'Hello';
 console.log(greeting.toUpperCase()); //HELLO
@@ -677,6 +704,38 @@ console.log(greeting.toLowerCase()); //hello
 let str = 'Welcome to WebDraftt. Learn JavaScript on WebDraftt';
 console.log(str.indexOf('WebDraftt')); // 11
 console.log(str.indexOf('webdraftt')); // -1
+
+```
+
+- slice() - возвращает часть строки по заданным начальному и конечному индексам; если передать отрицательные значения, то отсчет будет осуществляться с конца строки
+
+```
+let str = 'Hello. My name is Molly.';
+console.log(str.slice(7, 9)); // My
+
+//если второй параметр не указан, то будет возвращена часть //строки с заданного индекса и до ее конца  
+console.log(str.slice(7)); // My name is Molly.
+//пример с отрицательными значениями
+console.log(str.slice(-6, -1)); // Molly
+
+```
+
+- substring() - возвращает часть строки по заданным начальному и конечному индексам, не принимает отрицательных значений
+
+```
+let str = 'Hello. My name is Molly.';
+console.log(str.substring(7, 9)); // My
+
+//если второй параметр не указан, то будет возвращена часть //строки с заданного индекса и до ее конца  
+console.log(str.substring(7)); // My name is Molly.
+
+```
+
+- replace() - заменяет вхождения заданного значения (значение может быть регулярным выражением) на новое значение, указываемое вторым параметром
+
+```
+let str = 'Jack is my friend. Jack is a doctor.';
+console.log(str.replace('Jack', 'Paul')); // Paul is my friend. Jack is a doctor
 
 ```
 
