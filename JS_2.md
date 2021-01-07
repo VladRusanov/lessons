@@ -739,3 +739,10 @@ console.log(str.replace('Jack', 'Paul')); // Paul is my friend. Jack is a doctor
 
 ```
 
+- trim() - удаление пробелов в начале и конце строки
+
+```
+let str = '  String with extra spaces ';
+console.log(str.trim()); // 'String with extra spaces'
+
+```
