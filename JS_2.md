@@ -493,3 +493,12 @@ let value = getValue();
 
 ```
 
+```
+funtion getValue(a, b) {
+ return a + b;
+}
+
+let result = getValue(1, 2);
+// result === 3
+```
+
