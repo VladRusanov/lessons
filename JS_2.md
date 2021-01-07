@@ -423,3 +423,73 @@ sum(1, 2, 3, 4, 5); // 1, 2, [3,4,5]
 
 ```
 
+Также внутри каждой функции доступна для использования переменная arguments, которая содержит массив всех переданных функции параметров.
+
+```
+function someFunc1(a, b, c){
+  return arguments;
+}
+
+function someFunc2(...params){
+  return arguments;
+}
+
+someFunc1('Hello', 1, true); // ['Hello', 1, true]
+someFunc2(1, 2, 3); // [1, 2, 3]
+
+```
+
+# Ключевое слово return
+
+Ключевое слово return является оператором JavaScript, который возвращает переданное ему значение и завершает выполнение функции.
+
+```
+function getValue(a){
+  return a;
+}
+
+getValue(3); // 3
+
+```
+
+Если не передать значение, то функция вернет undefined.
+
+```
+function someFunc(){
+  return;
+}
+
+someFunc(); // undefined
+
+```
+
+Весь код, следующий после использования оператора return, никогда не будет выполнен.
+
+```
+function getValue(a){
+  if(a > 0) {
+    return a;
+  } else { 
+    return 0;
+  }
+  
+  console.log('test'); // никогда не выполнится
+}
+
+getValue(3); // 3
+getValue(-2); // 0
+
+```
+
+Зачем нужен return
+
+```
+function getValue() {
+ return 1;
+}
+
+let value = getValue();
+// value === 1
+
+```
+
