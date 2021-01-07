@@ -585,4 +585,43 @@ person.sayHi(); // Hello
 
 ```
 
+Так же можно использовать return и аргементы:
+
+```
+const person = {
+ name: 'Vlad',
+ saySomething: (a) => {
+   console.log(a);
+ },
+ getName: function() {
+   return 'Vlad';
+ }
+};
+
+person.saySomething('Hello, how are you?');
+const personName = person.getName(); // 'Vlad'
+
+```
+
+# Использование встроенных методов строк
+
+В JavaScript имеется широкий набор методов для работы со строками. 
+
+Рассмотрим наиболее популярные из них:
+
+- toUpperCase() / toLowerCase() - преобразование значения в верхний/нижний регистр;
+```
+let greeting = 'Hello';
+console.log(greeting.toUpperCase()); //HELLO
+console.log(greeting.toLowerCase()); //hello
+
+```
+- indexOf() - поиск заданного значения в строке; метод возвращает индекс первого найденного значения или же -1, если совпадений нет; поиск чувствителен к регистру
+
+```
+let str = 'Welcome to WebDraftt. Learn JavaScript on WebDraftt';
+console.log(str.indexOf('WebDraftt')); // 11
+console.log(str.indexOf('webdraftt')); // -1
+
+```
 
