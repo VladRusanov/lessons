@@ -127,6 +127,17 @@ for(let item of arr)
 
 ```
 
+# Перебор массива через for
+
+```
+const arr = [1,2,3,4];
+
+for(let i = 0; i < arr.length; i++) {
+  console.log(arr[i]);
+}
+
+```
+
 # Использование continue и break
 
 В JavaScript при работе с циклами возможно использование двух конструкций: continue и break.
