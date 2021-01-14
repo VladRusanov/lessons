@@ -607,6 +607,76 @@ user.getName();   // John Smith
 
 Итак, мы знаем, что this – это текущий объект при вызове «через точку»
 
+# «this» не является фиксированным
+
+В JavaScript ключевое слово «this» ведёт себя иначе, чем в большинстве других языков программирования. 
+
+Оно может использоваться в любой функции.
+
+```
+function getName() {
+    console.log(this.name);
+};
+
+const person = {
+    name: 'Vlad'
+};
+
+const animal = {
+    name: 'Bobik'
+};
+
+person.testMethod = getName;
+animal.testMethod= getName;
+
+person.testMethod();
+animal.testMethod();
+
+```
+
+# Потеря контекста
+
+Передача метода отдельно от объекта
+
+```
+let user = {
+    name: "Джон",
+    hi: function () {
+        alert(this.name);
+    }
+};
+
+// разделим получение метода объекта и его вызов в разных строках
+let hi = user.hi;
+hi(); // Ошибка, потому что значением this является undefined
+
+```
+
+Как это исправить?
+
+# У стрелочных функций нет «this»
+
+Стрелочные функции особенные: 
+
+у них нет своего «собственного» this. 
+
+Если мы используем this внутри стрелочной функции, то его значение берётся из внешней «нормальной» функции.
+
+Например, здесь arrow() использует значение this из внешнего метода user.sayHi():
+
+```
+let user = {
+  firstName: "Илья",
+  sayHi() {
+    let arrow = () => alert(this.firstName);
+    arrow();
+  }
+};
+
+user.sayHi(); // Илья
+
+```
+
 Как этот this переопределить?
 
 - Метод call
@@ -676,6 +746,7 @@ showFullName.call(user, 'firstName', 'surname');
 showFullName.apply(user, ['firstName', 'surname']);
 
 ```
+
 
 HomeWork: 
 
