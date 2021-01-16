@@ -330,13 +330,6 @@ const valObject0 = {
  values: [1, '2', 4, 8, '8',  3, 10, null, false],
 };
 
-const valObject1 = {
- values: [13, '21', 4, 6, '8'],
-};
-
-const valObject2 = {
- items: [13, '21', 4, 6, '8'],
-};
 
 const result = getNewArray...; // Ссылкаясь на массив ключа values из valObject0 [4, 8]
 
