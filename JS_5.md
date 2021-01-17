@@ -56,7 +56,6 @@ function Person(name, lastName, age, dream) {
 Используя специальное свойство new.target внутри функции, мы можем проверить, вызвана ли функция при помощи оператора new или без него.
 
 ```
-
 function Person() {
     alert(new.target);
 }
@@ -67,4 +66,4 @@ Person(); // undefined
 // с "new":
 new Person(); // function User { ... }
 
-```
+
