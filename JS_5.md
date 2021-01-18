@@ -50,6 +50,7 @@ function Person(name, lastName, age, dream) {
 
   // return this;  (неявно)
 }
+```
 
 # new.target
 
@@ -65,5 +66,30 @@ Person(); // undefined
 
 // с "new":
 new Person(); // function User { ... }
+
+```
+
+# Оператор instanceof
+
+Оператор instanceof позволяет проверить, с помощью какого конструктора создан объект.
+
+Если объект создан с помощью определенного конструктора, то оператор возвращает true:
+
+```
+function User(...) {...}
+
+const tom = new User("Том", 26);
+ 
+const isUser = tom instanceof User;
+const isCar = tom instanceof Car;
+console.log(isUser);    // true
+console.log(isCar);     // false
+
+```
+
+
+
+
+
 
 
