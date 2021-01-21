@@ -339,7 +339,7 @@ const valObject0 = {
 };
 
 
-const result = getNewArray...; // Ссылкаясь на массив ключа values из valObject0 [4, 8]
+const result = getNewArray...; // Ссылаясь на массив ключа values из valObject0 [4, 8]
 
 ```
 
