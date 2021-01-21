@@ -91,16 +91,25 @@ mySpan.style.background = 'red';
 
 
 ```
-<div>
-  <div>
-     <span>Hello</span>
-  </div>
-</div>
+<ul>
+  <li>Этот</li>
+  <li>тест</li>
+</ul>
+<ul>
+  <li>полностью</li>
+  <li>пройден</li>
+</ul>
+<script>
+  let elements = document.querySelectorAll('ul > li:last-child');
 
-
-
+  for (let elem of elements) {
+    alert(elem.innerHTML); // "тест", "пройден"
+  }
+</script>
 
 ```
+
+
 
 
 
