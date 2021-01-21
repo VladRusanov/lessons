@@ -87,7 +87,20 @@ mySpan.style.background = 'red';
 
 - querySelectorAll
 
-Метод для поиска элементов в DOM 
+Метод для поиска элементов в DOM по селектору
+
+
+```
+<div>
+  <div>
+     <span>Hello</span>
+  </div>
+</div>
+
+
+
+
+```
 
 
 
