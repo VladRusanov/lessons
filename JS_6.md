@@ -63,7 +63,7 @@ document.body.style.background = "red";
 
 ```
 
-# Поиск в DOM: getElement*, querySelector*
+# Поиск в DOM: getElement*, querySelector*, getElementsBy*
 
 - document.getElementById или просто id
 
@@ -84,6 +84,32 @@ mySpan.style.background = 'red';
 Только document.getElementById, а не anyElem.getElementById
 
 Метод getElementById можно вызвать только для объекта document. Он осуществляет поиск по id по всему документу.
+
+- getElementsBy
+
+Возвращает элементы, которые имеют данный CSS-класс. **Возвращаем коллекцию**
+
+```
+<span class="className"></span>
+<span class="className"></span>
+<span class="className"></span>
+<span class="className"></span>
+
+
+// получить все элементы c классом "className" в документе
+let spans = document.getElementsByclassName('className');
+
+```
+- getElementsByTagName(tag)
+
+Ищет элементы с данным тегом и возвращает их коллекцию.
+
+```
+// получить все элементы div в документе
+let divs = document.getElementsByTagName('div');
+
+```
+
 
 - querySelectorAll
 
