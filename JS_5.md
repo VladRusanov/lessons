@@ -326,7 +326,7 @@ person1.setAge(1); // передать возраст можно как угод
 person1.getAge(); // 'Validation Error'
 
 person1.setAge(20); // передать возраст можно как угодно
-person1.getAge(); // 20
+person1.getAge(); // Новое значение - 20
 
 ```
 
