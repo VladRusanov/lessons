@@ -250,6 +250,39 @@ let user = new User();
 
 ```
 
+
+# Prototype для нативных объектов
+
+Через prototype мы можем создавать свои методы для нативных объектов таких как Array, Object и т.д.
+
+Давайте сделать свой метод для массива
+
+```
+Array.prototype.sayHello = function () {
+    console.log('Hello! Im array');
+};
+
+const arr = [1, 2, 3];
+arr.sayHello(); // Hello! Im array
+
+```
+
+Давайте сделаем свой метод для объекта
+
+```
+Object.prototype.getName = function (params) {
+    console.log('Hello! Im object');
+};
+
+const person = {
+    test1: 1,
+    test2: 2,
+};
+
+person.getName();
+
+```
+
 HomeWork:
 
 0. Доделать прошлую домашку)
