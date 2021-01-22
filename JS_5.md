@@ -6,6 +6,7 @@
 
 Это можно сделать при помощи функции-конструктора и оператора "new".
 
+
 # Функция-конструктор
 
 Функции-конструкторы являются обычными функциями. Но есть два соглашения:
@@ -68,6 +69,34 @@ Person(); // undefined
 new Person(); // function User { ... }
 
 ```
+
+# Свойство constructor
+
+Свойство constructor - содержит ссылку на конструктор, которым объект был создан.
+
+```
+[].constructor; //Array;
+({}).constructor; //Object;
+
+function User() {};
+new User().constructor; //User
+
+```
+
+
+```
+function User() {};
+
+alert(User.prototype.constructor); //User
+
+User.prototype = {
+	sayHi: function(){}
+};
+
+alert(User.prototype.constructor); //Object
+
+```
+
 
 # Оператор instanceof
 
