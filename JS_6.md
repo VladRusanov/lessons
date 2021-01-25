@@ -364,6 +364,37 @@ after
 
 ![help](https://learn.javascript.ru/article/modifying-document/before-prepend-append-after.svg)
 
+
+# Удаление узлов
+
+Для удаления узла есть методы node.remove().
+
+```
+<style>
+.alert {
+  padding: 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 4px;
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+</style>
+
+<script>
+  let div = document.createElement('div');
+  div.className = "alert";
+  div.innerHTML = "<strong>Всем привет!</strong> Вы прочитали важное сообщение.";
+
+  document.body.append(div);
+  div.remove();
+</script>
+
+```
+
+# Клонирование узлов: cloneNode
+
+
+
 Homework:
 
 1)  Создать функцию конструктор Animal c аргументами name, age, color. Написать логику для того, чтобы функцию можно было вызывать как с, так и без new:
