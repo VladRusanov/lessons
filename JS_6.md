@@ -263,6 +263,13 @@ let divs = document.getElementsByTagName('div');
 Иногда полезен еще тип Node.TEXT_NODE, который равен 3. Это текстовые элементы.
 
 
+Типы узлов (NODE) документа:
+
+https://prnt.sc/xmdj9k
+![help](https://prnt.sc/xmdj9k)
+
+
+
 Homework:
 
 1)  Создать функцию конструктор Animal c аргументами name, age, color. Написать логику для того, чтобы функцию можно было вызывать как с, так и без new:
