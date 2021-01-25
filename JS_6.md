@@ -262,12 +262,107 @@ let divs = document.getElementsByTagName('div');
 
 Иногда полезен еще тип Node.TEXT_NODE, который равен 3. Это текстовые элементы.
 
+# Изменение документа
 
-Типы узлов (NODE) документа:
+Создание элемента
 
-![help](https://prnt.sc/xmdj9k)
+DOM-узел можно создать двумя методами:
+
+- document.createElement(tag)
+
+Создаёт новый элемент с заданным тегом:
+
+```
+let div = document.createElement('div');
+
+```
+
+- document.createTextNode(text)
+
+Создаёт новый текстовый узел с заданным текстом:
+
+```
+let textNode = document.createTextNode('А вот и я');
+
+```
+
+# Методы вставки
+
+Чтобы наш div появился, нам нужно вставить его где-нибудь в document. Например, в document.body.
+
+Для этого есть метод append, в нашем случае: document.body.append(div).
+
+Вот полный пример:
+
+```
+<style>
+.alert {
+  padding: 15px;
+  border: 1px solid #d6e9c6;
+  border-radius: 4px;
+  color: #3c763d;
+  background-color: #dff0d8;
+}
+</style>
+
+<script>
+  let div = document.createElement('div');
+  div.className = "alert";
+  document.body.append(div);
+</script>
+
+```
+
+Вот методы для различных вариантов вставки:
+
+- node.append(...nodes or strings) – добавляет узлы или строки в конец node,
+
+- node.prepend(...nodes or strings) – вставляет узлы или строки в начало node,
+
+- node.before(...nodes or strings) –- вставляет узлы или строки до node,
+
+- node.after(...nodes or strings) –- вставляет узлы или строки после node,
+
+- node.replaceWith(...nodes or strings) –- заменяет node заданными узлами или строками.
+
+Вот пример использования этих методов, чтобы добавить новые элементы в список и текст до/после него:
+
+```
+<ol id="ol">
+  <li>0</li>
+  <li>1</li>
+  <li>2</li>
+</ol>
+
+<script>
+  ol.before('before'); // вставить строку "before" перед <ol>
+  ol.after('after'); // вставить строку "after" после <ol>
+
+  let liFirst = document.createElement('li');
+  liFirst.innerHTML = 'prepend';
+  ol.prepend(liFirst); // вставить liFirst в начало <ol>
+
+  let liLast = document.createElement('li');
+  liLast.innerHTML = 'append';
+  ol.append(liLast); // вставить liLast в конец <ol>
+</script>
+
+```
+
+before
+
+  1. prepend
+  2. 0
+  3. 1
+  4. 2
+  5. append
+
+after
 
 
+Наглядная иллюстрация того, куда эти методы вставляют:
+
+![help](https://learn.javascript.ru/article/modifying-document/before-prepend-append-after.svg)
 
 Homework:
 
