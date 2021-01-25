@@ -107,6 +107,21 @@ document.body.style.background = "red";
 
 ```
 
+# Простейший DOM
+
+```
+<html>
+  <head>
+    <title>Заголовок</title>
+  </head>
+  <body>
+     Прекрасный документ
+   </body>
+</html>
+
+
+```
+
 # Поиск в DOM: getElement*, querySelector*, getElementsBy*
 
 - document.getElementById или просто id
