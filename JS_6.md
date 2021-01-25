@@ -122,6 +122,60 @@ document.body.style.background = "red";
 
 ```
 
+Самый внешний тег - <html>, поэтому дерево начинает расти от него.
+
+Внутри <html> находятся два узла: 
+- <head> и <body> - они становятся дочерними узлами для <html>.
+
+![help](https://javascript.ru/files/upload/jsintro/dom0.png)
+
+Теги образуют узлы-элементы (element node). 
+
+Текст представлен текстовыми узлами (text node). И то и другое - равноправные узлы дерева DOM.
+
+# Пример посложнее
+
+Рассмотрим теперь более жизненную страничку:
+
+```
+<html>
+    <head>
+        <title>
+            О лосях
+        </title>
+    </head>
+    <body>
+        Правда о лосях.
+        <ol>
+            <li>
+                Лось - животное хитрое
+            </li>
+            <li>
+                .. И коварное
+            </li>
+        </ol>
+    </body>
+</html>
+
+```
+
+Корневым элементом иерархии является html. 
+
+У него есть два потомка. Первый - head, второй - body. 
+
+И так далее, каждый вложенный тег является потомком тега выше:
+
+![help](https://javascript.ru/files/learn/start/Losi.png)
+
+На этом рисунке синим цветом обозначены элементы-узлы, черным - текстовые элементы.
+
+Дерево образовано за счет синих элементов-узлов - тегов HTML.
+
+А вот так выглядит дерево, если изобразить его прямо на HTML-страничке:
+
+![help](https://javascript.ru/files/upload/jsintro/losi-dom.png)
+
+
 # Поиск в DOM: getElement*, querySelector*, getElementsBy*
 
 - document.getElementById или просто id
@@ -159,6 +213,7 @@ mySpan.style.background = 'red';
 let spans = document.getElementsByclassName('className');
 
 ```
+
 - getElementsByTagName(tag)
 
 Ищет элементы с данным тегом и возвращает их коллекцию.
@@ -168,7 +223,6 @@ let spans = document.getElementsByclassName('className');
 let divs = document.getElementsByTagName('div');
 
 ```
-
 
 - querySelectorAll
 
@@ -193,6 +247,20 @@ let divs = document.getElementsByTagName('div');
 </script>
 
 ```
+
+# Типы DOM-элементов
+
+У каждого элемента в DOM-модели есть тип. 
+
+Его номер хранится в атрибуте elem.nodeType
+
+Всего в DOM различают **12 типов элементов**.
+
+Обычно используется только один: 
+
+- Node.ELEMENT_NODE, номер которого равен 1. Элементам этого типа соответствуют HTML-теги.
+
+Иногда полезен еще тип Node.TEXT_NODE, который равен 3. Это текстовые элементы.
 
 
 Homework:
