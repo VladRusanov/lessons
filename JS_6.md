@@ -265,7 +265,6 @@ let divs = document.getElementsByTagName('div');
 
 Типы узлов (NODE) документа:
 
-https://prnt.sc/xmdj9k
 ![help](https://prnt.sc/xmdj9k)
 
 
