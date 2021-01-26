@@ -50,6 +50,8 @@ etc.
 
 4) Напилить код функции modificator, такой, чтобы в результате работы кода:
 
+про .calle посмотреть тут https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Functions/arguments/callee
+
 ```
 function sampleFunc () {
     console.log ( `${arguments.callee.name}: ${arguments[0]} | ${arguments[1]}` )
