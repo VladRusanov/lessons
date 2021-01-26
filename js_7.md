@@ -48,7 +48,24 @@ etc.
 
 ![help](https://github.com/olgamaslovaolga/Alevel-Markup/raw/master/images/hw-8.3.png)
 
-4) Создать массив group, элементы которого будут объектами, содержащими данные каждого студента группы
+4) Напилить код функции modificator, такой, чтобы в результате работы кода:
+
+```
+function sampleFunc () {
+    console.log ( `${arguments.callee.name}: ${arguments[0]} | ${arguments[1]}` )
+}
+
+function modificator ( func ) {
+    ...
+}
+
+testFunc = modificator( sampleFunc )
+
+testFunc(); // sampleFunc: test | sample
+
+```
+
+5) Создать массив group, элементы которого будут объектами, содержащими данные каждого студента группы
 
 Какие данные - на ваше усмотрение ( например, имя, фамилия, возраст, наличие ноутбука и т.д. )
 
