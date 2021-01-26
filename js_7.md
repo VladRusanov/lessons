@@ -11,6 +11,8 @@ etc.
 
 ```
 
-2) Повторите по данному по образцу:
+2) Повторите по данному по образцу (используя JS):
+
+Родительский div можно добавить просто в html файле
 
 ![help](https://raw.githubusercontent.com/olgamaslovaolga/Alevel-Markup/master/images/img-hw7.1.png)
