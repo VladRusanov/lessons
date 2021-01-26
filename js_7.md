@@ -22,7 +22,7 @@ etc.
 
 ![help](https://raw.githubusercontent.com/olgamaslovaolga/Alevel-Markup/master/images/img-hw7.1.png)
 
-3) У вас есть следующий код (в стилях только флекс):
+3) У вас есть следующий код:
 
 ```
 // index.html
@@ -44,6 +44,6 @@ etc.
 
 ```
 
-С помощью стилей привести блоки в такой вид
+С помощью стилей привести блоки в такой вид (в стилях только флекс)
 
 ![help](https://github.com/olgamaslovaolga/Alevel-Markup/raw/master/images/hw-8.3.png)
