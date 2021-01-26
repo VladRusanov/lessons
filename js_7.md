@@ -13,5 +13,4 @@ etc.
 
 2) Повторите по данному по образцу:
 
-https://raw.githubusercontent.com/olgamaslovaolga/Alevel-Markup/master/images/img-hw7.1.png
-
+![help](https://raw.githubusercontent.com/olgamaslovaolga/Alevel-Markup/master/images/img-hw7.1.png)
