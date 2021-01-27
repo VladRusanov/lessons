@@ -448,8 +448,17 @@ document.addEventListener("DOMContentLoaded", function() {
   
 ![help](https://learn.javascript.ru/article/bubbling-and-capturing/eventflow.svg)
 
-# HomeWork6
+Чтобы поймать событие на стадии погружения, нужно использовать третий аргумент capture вот так:
 
+```
+elem.addEventListener(..., {capture: true})
+// или просто "true", как сокращение для {capture: true}
+elem.addEventListener(..., true)
+
+```
+
+
+# HomeWork6
 
 0) УЧИТЬ ТЕОРИЮ | УЧИТЬ ТЕОРИЮ | УЧИТЬ ТЕОРИЮ | УЧИТЬ ТЕОРИЮ | УЧИТЬ ТЕОРИЮ  !important
 
