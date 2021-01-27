@@ -282,8 +282,51 @@ document.addEventListener("DOMContentLoaded", function() {
 ```
 
 
-Событие: input
+# Событие: input
 
+Событие input срабатывает каждый раз при изменении значения.
+
+В отличие от событий клавиатуры, оно работает при любых изменениях значений, даже если они не связаны с клавиатурными действиями: вставка с помощью мыши или распознавание речи при диктовке текста.
+
+Например:
+
+```
+<input type="text" id="inputId"> oninput: <span id="result"></span>
+<script>
+    const inputId = document.getElementById('inputId');
+    inputId.oninput = function () {
+        result.innerHTML = inputId.value;
+    };
+</script>
+
+```
+
+# События: cut, copy, paste
+
+Эти события происходят при вырезании/копировании/вставке данных.
+
+Они относятся к классу ClipboardEvent и обеспечивают доступ к копируемым/вставляемым данным.
+
+Мы также можем использовать event.preventDefault() для предотвращения действия по умолчанию, и в итоге ничего не скопируется/не вставится.
+
+Например, код, приведённый ниже, предотвращает все подобные события и показывает, что мы пытаемся вырезать/копировать/вставить:
+
+```
+<input type="text" id="inputId">
+<script>
+    const inputId = document.getElementById('inputId');
+    inputId.oncut = function (event) {
+        console.log('oncut');
+    }
+    inputId.oncopy = function (event) {
+        console.log('oncopy');
+    }
+    inputId.onpaste = function () {
+        console.log('onpaste');
+    }
+</script>
+
+```
 
 # HomeWork6
 
