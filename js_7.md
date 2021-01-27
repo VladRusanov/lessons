@@ -507,7 +507,7 @@ etc.
 
 ![help](https://github.com/olgamaslovaolga/Alevel-Markup/raw/master/images/hw-8.3.png)
 
-4) Напилить код функции modificator, такой, чтобы в результате работы кода:
+4) Напилить код функции modificator, такой, чтобы в результате работы кода была строка "sampleFunc: test | sample":
 
 про .calle посмотреть тут https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Functions/arguments/callee
 
