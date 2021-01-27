@@ -380,6 +380,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ```
 
+# Всплытие и погружение
+
+Давайте начнём с примера.
+
+Этот обработчик для <div> сработает, если вы кликните по любому из вложенных тегов, будь то <em> или <code>:
+  
+```
+<div onclick="alert('Обработчик!')">
+  <em>Если вы кликните на <code>EM</code>, сработает обработчик на <code>DIV</code></em>
+</div>
+
+```
+
 # HomeWork6
 
 
