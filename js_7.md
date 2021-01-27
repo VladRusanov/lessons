@@ -363,7 +363,22 @@ document.addEventListener("DOMContentLoaded", function() {
 
 ```
 
+# Отмена стандартного поведения Event.preventDefault()
 
+Есть два способа отменить действие браузера:
+
+- Основной способ – это воспользоваться объектом event. 
+
+Для отмены действия браузера существует стандартный метод event.preventDefault().
+
+- Если же обработчик назначен через on<событие> (не через addEventListener), то также можно вернуть false из обработчика.
+
+```
+<a href="/" onclick="return false">Нажми здесь</a>
+или
+<a href="/" onclick="event.preventDefault()">здесь</a>
+
+```
 
 # HomeWork6
 
