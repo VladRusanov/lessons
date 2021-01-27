@@ -439,6 +439,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 Она очень редко используется в реальном коде, однако тоже может быть полезной.
 
+
+Стандарт DOM Events описывает 3 фазы прохода события:
+
+- Фаза погружения (capturing phase) – событие сначала идёт сверху вниз.
+- Фаза цели (target phase) – событие достигло целевого(исходного) элемента.
+- Фаза всплытия (bubbling stage) – событие начинает всплывать.
+  
+![help](https://learn.javascript.ru/article/bubbling-and-capturing/eventflow.svg)
+
 # HomeWork6
 
 
