@@ -585,3 +585,4 @@ getStudentsList(group); // Name - Vlad,lastName - Test,haveLaptop - true
 
 ```
 
+**'Name - Vlad,lastName - Test,haveLaptop - true' - эта строка должна появиться только после преобразования объекта к строке**
