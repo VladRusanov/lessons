@@ -520,7 +520,7 @@ function modificator ( func ) {
     ...
 }
 
-testFunc = modificator( sampleFunc )
+const testFunc = modificator( sampleFunc )
 
 testFunc(); // sampleFunc: test | sample
 
