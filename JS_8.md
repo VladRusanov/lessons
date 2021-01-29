@@ -47,4 +47,4 @@ HTML:
 
 Нужно переместить круг по Х координате на сколько,
 
-![help](https://prnt.sc/xu1x8n)
+https://prnt.sc/xu1x8n
