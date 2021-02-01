@@ -235,6 +235,57 @@ console.log(count());  // 2
 
 Во время выполнения этого кода, движок JavaScript создаёт глобальный контекст вызова, для того, чтобы выполнить глобальный код и когда он доходит до вызова функции first(), он создаёт новый контекст выполнения для этой функции и ставит её на вершину стека вызовов.
 
+Так что он будет выглядеть таким образом для кода выше:
+
+
+![help](https://miro.medium.com/max/700/1*sOyjVHh8h49PThAVs7PS6w.png)
+
+У лексического окружения есть два компонента: 
+
+(1) запись в окружении 
+
+(2) отсылка к внешнему окружению.
+
+1) Запись в окружении(environment record) это место хранятся объявления переменной или функции.
+
+2) Отсылка к внешнему окружению (reference to the outer environment) означает то, что у него есть доступ к внешнему (родительскому) лексическому окружению. 
+
+Этот компонент самый важный для понимания того, как работают замыкания.
+
+```
+lexicalEnvironment = {
+  environmentRecord: {
+    <identifier> : <value>,
+    <identifier> : <value>
+  }
+  outer: < Reference to the parent lexical environment>
+}
+
+```
+
+Пример: 
+
+```
+let a = 'Hello World!';
+function first() {
+  let b = 25;  
+  console.log('Inside first function');
+}
+first();
+console.log('Inside global execution context');
+
+```
+
+```
+globalLexicalEnvironment = {
+  environmentRecord: {
+      a     : 'Hello World!',
+      first : < reference to function object >
+  }
+  outer: null
+}
+
+```
 
 
 HomeWork 7:
