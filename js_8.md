@@ -1,3 +1,39 @@
+# Пример всплытия и погружения
+
+```
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body * {
+            margin: 10px;
+            border: 1px solid blue;
+        }
+    </style>
+</head>
+
+<body>
+    <form>FORM
+        <div>DIV
+            <p>P</p>
+        </div>
+    </form>
+    <script>
+        for (let elem of document.querySelectorAll('*')) {
+            elem.addEventListener("click", e => alert(`Погружение: ${elem.tagName}`), true);
+            elem.addEventListener("click", e => alert(`Всплытие: ${elem.tagName}`));
+        }
+    </script>
+</body>
+
+</html>
+
+```
+
 # Прекращение всплытия событий
 
 Всплытие идёт с «целевого» элемента прямо наверх. 
