@@ -468,7 +468,41 @@ alert(user); // {name: "John", age: 30}
 
 # JSON.stringify
 
+JSON (JavaScript Object Notation) – это общий формат для представления значений и объектов
 
+JavaScript предоставляет методы:
+
+- JSON.stringify для преобразования объектов в JSON.
+
+- JSON.parse для преобразования JSON обратно в объект.
+
+Например, здесь мы преобразуем через JSON.stringify данные студента:
+
+```
+let student = {
+  name: 'John',
+  age: 30,
+  isAdmin: false,
+  courses: ['html', 'css', 'js'],
+  wife: null
+};
+
+let json = JSON.stringify(student);
+
+alert(typeof json); // мы получили строку!
+
+alert(json);
+/* выведет объект в формате JSON:
+{
+  "name": "John",
+  "age": 30,
+  "isAdmin": false,
+  "courses": ["html", "css", "js"],
+  "wife": null
+}
+*/
+
+```
 
 HomeWork 7:
 
