@@ -30,9 +30,10 @@ Hemoweork8:
     <li class="li">1</li>
     <li class="li">2</li>
     <li class="li">3</li>
+    <li class="li">3</li>
     <li class="li">Hello</li>
 </ul>
-<button id='sum'></button>
+<button id='sum'>Get Sum</button>
 <input type="text" id="inp">
 
 ```
