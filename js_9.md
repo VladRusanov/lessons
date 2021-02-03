@@ -41,6 +41,6 @@ Hemoweork8:
 
 Вот так должно быть:
 
-https://prnt.sc/y5v2qq
+https://prnt.sc/y5v875
 
 
