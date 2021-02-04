@@ -567,6 +567,52 @@ xhr.onerror = function () {
 
 - "json" – JSON (парсится автоматически).
 
+К примеру, давайте получим ответ в формате JSON:
+
+```
+let xhr = new XMLHttpRequest();
+
+xhr.open('GET', '/article/xmlhttprequest/example/json');
+
+xhr.responseType = 'json';
+
+xhr.send();
+
+// тело ответа {"сообщение": "Привет, мир!"}
+xhr.onload = function() {
+  let responseObj = xhr.response;
+  alert(responseObj.message); // Привет, мир!
+};
+
+```
+
+# Состояния запроса
+
+У XMLHttpRequest есть состояния, которые меняются по мере выполнения запроса. 
+
+Текущее состояние можно посмотреть в свойстве xhr.readyState.
+
+```
+UNSENT = 0; // исходное состояние
+OPENED = 1; // вызван метод open
+HEADERS_RECEIVED = 2; // получены заголовки ответа
+LOADING = 3; // ответ в процессе передачи (данные частично получены)
+DONE = 4; // запрос завершён
+
+```
+
+
+```
+xhr.onreadystatechange = function() {
+  if (xhr.readyState == 3) {
+    // загрузка
+  }
+  if (xhr.readyState == 4) {
+    // запрос завершён
+  }
+};
+
+```
 
 Hemoweork8: 
 
