@@ -163,7 +163,8 @@ let promise = new Promise(function(resolve, reject) {
 
 Спустя одну секунду «обработки» исполнитель вызовет resolve("done"), чтобы передать результат:
 
-https://learn.javascript.ru/article/promise-basics/promise-resolve-1.svg
+
+![help](https://learn.javascript.ru/article/promise-basics/promise-resolve-1.svg)
 
 Hemoweork8: 
 
