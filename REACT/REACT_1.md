@@ -20,6 +20,9 @@ React будет своевременно их обновлять, когда д
 
 Поскольку логика компонента написана на JavaScript, а не содержится в шаблонах, можно с лёгкостью передавать самые разные данные по всему приложению и держать состояние вне DOM.
 
+
+!!! В REACT ВСЕ - КОМПОНЕНТЫ !!!
+
 # Начало работы
 
 Create React App
@@ -262,6 +265,9 @@ export default App;
 
 # Как работать с разными файлами
 
+Давайте сделаем маркерованный список
+
+
 Давайте создадим два новых компонента
 
 - List.jsx
@@ -269,4 +275,93 @@ export default App;
 - LiItem.jsx
 
 
-№ 
+# LiItem.jsx
+
+```
+import React from 'react';
+
+class LiItem extends React.Component {
+    render() {
+        return (
+            <li>
+                test
+            </li>
+        );
+    }
+}
+
+export default LiItem;
+
+```
+
+# List.jsx
+
+```
+import React from 'react';
+import LiItem from './LiElement.jsx';
+
+class List extends React.Component {
+    render() {
+        return (
+            <ul>
+                <LiItem />
+                <LiItem />
+                <LiItem />
+            </ul>
+        )
+    }
+}
+
+export default List;
+
+```
+
+# App.jsx
+
+```
+import React from 'react';
+import List from './List.jsx';
+
+class App extends React.Component {
+  render() {
+    return (
+      <List />
+    )
+  }
+}
+
+export default App;
+
+```
+
+# Как использовать стили
+
+Давайте сделаем отступ для нашего списка
+
+Создадим файли style.css
+
+```
+./style.css
+
+.blockElem {
+    margin-left: 100px;
+}
+
+```
+
+```
+./App.js
+
+class App extends React.Component {
+  render() {
+    return (
+      <div className='blockElem'>
+        <List />
+      </div>
+    )
+  }
+}
+
+export default App;
+
+```
