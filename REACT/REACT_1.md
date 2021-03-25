@@ -365,3 +365,62 @@ class App extends React.Component {
 export default App;
 
 ```
+
+
+# props
+
+props - данные, которые мы можем перекидывать между компонентами
+
+props - это объект
+
+
+# Как получить доступ к props
+
+К примеру
+
+У нас есть компонент User
+
+```
+./User.jsx
+
+import React from 'react';
+
+class User extends React.Component {
+    render() {
+        console.log(this.props); // { name: 'Vlad' }
+        return (
+            <div></div>
+        )
+    }
+}
+
+export default User;
+
+```
+
+```
+./App.jsx
+
+import React from 'react';
+
+import User from './User.jsx';
+import './App.css';
+
+class App extends React.Component {
+  render() {
+    const data = 'Vlad';
+    return (
+      <div className='blockElem'>
+        <User name={data} />
+      </div>
+    )
+  }
+}
+
+export default App;
+
+```
+
+name - props для компонента User
+
+Получить доступ к переданным пропсам - this.props;
