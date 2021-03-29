@@ -725,7 +725,6 @@ componentDidMount() {
 
 Как это будет выглядеть?
 
-![image](https://user-images.githubusercontent.com/16369478/112891110-66ff1800-90e0-11eb-8954-df2da80c700e.png)
 
 ![chrome-capture](https://user-images.githubusercontent.com/16369478/112891481-dd037f00-90e0-11eb-8e0c-8a9c4bbcd807.gif)
 
