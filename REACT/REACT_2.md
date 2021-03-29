@@ -687,6 +687,19 @@ componentDidMount() {
 ```
 
 
+# Этап обновления
+
+- static getDerivedStateFromProps(props, state)
+
+- shouldComponentUpdate(nextProps, nextState): вызывается каждый раз при обновлении объекта props или state. В качестве параметра передаются новый объект props и state. Эта функция должна возвращать true (надо делать обновление) или false (игнорировать обновление). По умолчанию возвращается true. Но если функция будет возвращать false, то тем самым мы отключим обновление компонента, а последующие функции не будут срабатывать.
+
+- render(): рендеринг компонента (если shouldComponentUpdate возвращает true)
+
+- getSnapshotBeforeUpdate(prevProps, prevState): вызывается непосредственно перед компонента. Он позволяет компоненту получить информацию из DOM перед возможным обновлением. Возвращает в качестве значения какой-то отдельный аспект, который передается в качестве третьего параметра в метод componentDidUpdate() и может учитываться в componentDidUpdate при обновлении. Если нечего возвращать, то возвращается значение null
+
+- componentDidUpdate(prevProps, prevState, snapshot): вызывается сразу после обновления компонента (если shouldComponentUpdate возвращает true). В качестве параметров передаются старые значения объектов props и state. Третий параметр - значение, которое возвращает метод getSnapshotBeforeUpdate
+
+
 # HomeWork
 
 1. Сделать инпут range. При перетаскивании ползунка в range мы записываем value из range в новый инпут
@@ -706,3 +719,30 @@ componentDidMount() {
 ![image](https://user-images.githubusercontent.com/16369478/112888223-c3603880-90dc-11eb-88c6-325bf4ac21c0.png)
 
 !!! В КОНСОЛИ НЕ ДОЛЖНО БЫТЬ ВОРНИНГОВ И ОШИБОК !!!!
+
+
+2. Создать 2 компонента Test и Test2
+
+Как это будет выглядеть?
+
+![image](https://user-images.githubusercontent.com/16369478/112891110-66ff1800-90e0-11eb-8954-df2da80c700e.png)
+
+![chrome-capture](https://user-images.githubusercontent.com/16369478/112891481-dd037f00-90e0-11eb-8e0c-8a9c4bbcd807.gif)
+
+
+Test2 "вызывается" в Test 
+
+Test2 принимаетв в пропсы 3 поля - trigger (какое=то число), value (какое=то число), onClick (функция для события)
+
+- trigger - максимальное число, которое можем отображаться в инпуте (пусть это будет 10)
+
+- value - текущее знаяние для инпута
+
+- onClick - функция, которая будет менять это value
+
+В чем суть?
+
+
+
+
+
