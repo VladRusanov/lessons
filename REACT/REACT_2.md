@@ -689,4 +689,6 @@ componentDidMount() {
 
 # HomeWork
 
+1. Сделать инпут range. При перетаскивании ползунка в range мы записываем value из range в новый инпут
 
+![help](https://prnt.sc/10z95ql)
