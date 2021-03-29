@@ -691,4 +691,11 @@ componentDidMount() {
 
 1. Сделать инпут range. При перетаскивании ползунка в range мы записываем value из range в новый инпут
 
-https://prnt.sc/10z95ql
+Вот так должно быть
+
+
+![image](https://user-images.githubusercontent.com/16369478/112888254-cce9a080-90dc-11eb-8532-992d3d53636b.png)
+
+
+![image](https://user-images.githubusercontent.com/16369478/112888223-c3603880-90dc-11eb-88c6-325bf4ac21c0.png)
+
