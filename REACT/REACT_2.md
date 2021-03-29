@@ -699,3 +699,4 @@ componentDidMount() {
 
 ![image](https://user-images.githubusercontent.com/16369478/112888223-c3603880-90dc-11eb-88c6-325bf4ac21c0.png)
 
+!!! В КОНСОЛИ НЕ ДОЛЖНО БЫТЬ ВОРНИНГОВ И ОШИБОК !!!!
