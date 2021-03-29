@@ -713,10 +713,8 @@ componentDidMount() {
 Вот так должно быть
 
 
-![image](https://user-images.githubusercontent.com/16369478/112888254-cce9a080-90dc-11eb-8532-992d3d53636b.png)
+![chrome-capture (1)](https://user-images.githubusercontent.com/16369478/112895642-0bd02400-90e6-11eb-8395-68b1aecb3145.gif)
 
-
-![image](https://user-images.githubusercontent.com/16369478/112888223-c3603880-90dc-11eb-88c6-325bf4ac21c0.png)
 
 !!! В КОНСОЛИ НЕ ДОЛЖНО БЫТЬ ВОРНИНГОВ И ОШИБОК !!!!
 
