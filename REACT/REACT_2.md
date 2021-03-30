@@ -80,7 +80,7 @@ class App extends Component {
 ```
 class Test extends React.Component {
   render() {
-    console.log(this.props); { a: 5, b: 'Hello' }
+    console.log(this.props); // { a: 5, b: 'Hello' }
     this.props.b = 10; // !! ТАК НЕЛЬЗЯ !!
     return (
       <input placeholder={this.props.b} value={this.props.a} />
