@@ -1,3 +1,154 @@
+# функциональные компоненты React (пока без хуков)
+
+Функциональные компоненты - компоненты React, которые нужены для отображения чего-то на страницу (без какой-то сложной логики). 
+
+!!! Мы пока не берем во внимание функции с хуками !!!
+
+```
+./Main.jsx
+
+import React from 'react';
+
+const Main = () => {
+    return (
+        <div>
+            <span>hello</span>
+        </div>
+    )
+}
+
+export default Main;
+
+```
+Вызов компонента
+
+```
+./App.jsx
+
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Main />
+      </div>
+    )
+  }
+}
+
+```
+
+Теперь пример на пропсы
+
+```
+import React from 'react';
+
+const Main = (props) => {
+    return (
+        <div>
+            <span>{props.text}</span>
+        </div>
+    )
+}
+
+export default Main;
+
+```
+
+```
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <Main text="Text"/>
+      </div>
+    )
+  }
+}
+
+```
+
+
+# Условный рендеринг
+
+React позволяет разделить логику на независимые компоненты. Эти компоненты можно показывать или прятать в зависимости от текущего состояния.
+
+Условный рендеринг в React работает так же, как условные выражения работают в JavaScript.
+
+```
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isOpen: false
+    }
+  }
+
+  toggleOpen = () => {
+    this.setState((prevState) => ({
+      isOpen: !prevState.isOpen
+    }));
+  }
+
+  componentDidMount() {
+    this.toggleOpen();
+  }
+
+  render() {
+    return (
+      <div>
+        {this.state.isOpen ? (
+          <div>Open</div>
+        ) : (
+          <div>Close</div>
+        )}
+      </div>
+    )
+  }
+}
+
+```
+
+Также можно комбинировать с компонентами
+
+```
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: false
+    }
+  }
+
+  signIn = () => {
+    this.setState({
+      isLoggedIn: true
+    });
+  }
+
+  componentDidMount() {
+    this.signIn();
+  }
+
+  spawnForm = () => {
+    const { isLoggedIn } = this.state;
+    if (isLoggedIn) {
+      return <AppForm />
+    }
+    return <SignInFrom />
+  }
+
+  render() {
+    return (
+      <div>
+        {this.spawnForm()}
+      </div>
+    )
+  }
+}
+
+```
+
+
 # Проблема DOM
 
 Главная проблема DOM — он никогда не был рассчитан для создания динамического пользовательского интерфейса (UI)
@@ -440,3 +591,95 @@ class Main extends React.Component {
 export default Main;
 
 ```
+
+
+# Рефы и DOM
+
+
+Рефы дают возможность получить доступ к DOM-узлам или React-элементам, созданным в рендер-методе.
+    
+# Когда использовать рефы
+
+Ситуации, в которых использование рефов является оправданным:
+
+- Управление фокусом, выделение текста или воспроизведение медиа.
+
+- Императивный вызов анимаций.
+
+- Интеграция со сторонними DOM-библиотеками.
+    
+!!!!!! Избегайте использования рефов в ситуациях, когда задачу можно решить декларативным способом. !!!!!!
+
+# Создание рефов
+
+Рефы создаются с помощью React.createRef() и прикрепляются к React-элементам через ref атрибут. 
+
+Обычно рефы присваиваются свойству экземпляра класса в конструкторе, чтобы на них можно было ссылаться из любой части компонента.
+
+```
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+    this.myRef = React.createRef();
+  }
+  render() {
+    return <div ref={this.myRef} />;
+  }
+}
+
+```
+
+# Доступ к рефам
+
+Когда реф передаётся элементу в методе render, ссылка на данный узел доступна через свойство рефа current.
+
+```
+const node = this.myRef.current;
+
+```
+
+# Значение рефа отличается в зависимости от типа узла:
+
+- Когда атрибут ref используется с HTML-элементом, свойство current созданного рефа в конструкторе с помощью React.createRef() получает соответствующий DOM-элемент.
+
+- Когда атрибут ref используется с классовым компонентом, свойство current объекта-рефа получает экземпляр смонтированного компонента.
+
+- Нельзя использовать ref атрибут с функциональными компонентами, потому что для них не создаётся экземпляров.
+
+
+# Добавление рефа к DOM-элементу
+
+В представленном ниже примере ref используется для хранения ссылки на DOM-элемент и установки фокуса в инпут.
+
+```
+class Main extends React.Component {
+    constructor(props) {
+        super(props);
+        // создадим реф в поле `textInput` для хранения DOM-элемента
+        this.textInput = React.createRef();
+    }
+
+    focusTextInput() {
+        // Установим фокус на текстовое поле с помощью чистого DOM API
+        // Примечание: обращаемся к "current", чтобы получить DOM-узел
+        this.textInput.current.focus();
+    }
+
+    componentDidMount() {
+        this.focusTextInput()
+    }
+
+    render() {
+        // описываем, что мы хотим связать реф <input>
+        // с `textInput` созданным в конструкторе
+        return (
+            <div>
+                <input type="text" ref={this.textInput} />
+            </div>
+        )
+    }
+}
+
+```
+
+
