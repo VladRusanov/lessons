@@ -288,7 +288,6 @@ render() {
 
 
 ```
-
 import React from 'react';
 
 export default class WrapperComponent extends React.Component {
@@ -307,7 +306,6 @@ export default class WrapperComponent extends React.Component {
 }
 
 ```
----
 
 ```
 
