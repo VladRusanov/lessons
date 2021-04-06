@@ -276,3 +276,78 @@ render() {
 ```
 
 Аналогично, <input type="checkbox"> и <input type="radio"> используют defaultChecked, а <select> и <textarea> — defaultValue.
+
+# props.children
+
+Есть такой пропс как - children
+
+пропс children принимает все дочерние компоненты, которые мы обернем в компонент
+
+Пример:
+
+
+```
+import React from 'react';
+
+export default class WrapperComponent extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {}
+    }
+
+    render() {
+        return (
+            <div className="wrapper">
+                <div>{this.props.children}</div>
+            </div>
+        )
+    }
+}
+
+```
+
+```
+import React, { Component } from 'react'
+import WrapperComponent from './WrapperComponent.jsx';
+import './styles.css'
+
+class Main extends Component {
+    constructor(props) {
+        super(props)
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.input = React.createRef();
+    }
+
+    handleSubmit(event) {
+        alert('Отправленное имя: ' + this.input.current.value);
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.handleSubmit}>
+                <label>
+                    Имя:
+                    <input type="text" />
+                </label>
+                <WrapperComponent>
+                    <div>
+                        <input type="submit" value="Отправить" />
+                    </div>
+                    <div>
+                        <input type="submit" value="Отправить" />
+                    </div>
+                    <div>
+                        <input type="submit" value="Отправить" />
+                    </div>
+                </WrapperComponent>
+            </form>
+        )
+    }
+}
+
+export default Main
+
+```
+
+WrapperComponent оборачивает какие-то элементы и 
