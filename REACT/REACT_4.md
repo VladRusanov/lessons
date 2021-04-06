@@ -1,3 +1,115 @@
+# Фрагменты
+
+Возврат нескольких элементов из компонента является распространённой практикой в React.
+
+Фрагменты позволяют формировать список дочерних элементов, не создавая лишних узлов в DOM.
+
+```
+render() {
+  return (
+    <React.Fragment>
+      <ChildA />
+      <ChildB />
+      <ChildC />
+    </React.Fragment>
+  );
+}
+
+```
+
+Также существует сокращённая запись.
+
+```
+render() {
+  return (
+    <>
+      <ChildA />
+      <ChildB />
+      <ChildC />
+    </>
+  );
+}
+
+```
+
+Мотивация
+
+Возврат списка дочерних элементов из компонента — распространённая практика. Рассмотрим пример на React:
+
+```
+class Table extends React.Component {
+  render() {
+    return (
+      <table>
+        <tr>
+          <Columns />
+        </tr>
+      </table>
+    );
+  }
+}
+
+```
+Columns должен вернуть несколько элементов td, чтобы HTML получился валидным. 
+
+Если использовать div как родительский элемент внутри метода render() компонента Columns, то HTML окажется невалидным.
+
+```
+class Columns extends React.Component {
+  render() {
+    return (
+      <div>
+        <td>Привет</td>
+        <td>Мир</td>
+      </div>
+    );
+  }
+}
+
+```
+
+Результатом вывода <Table /> будет:
+
+```
+<table>
+  <tr>
+    <div>
+      <td>Привет</td>
+      <td>Мир</td>
+    </div>
+  </tr>
+</table>
+
+```
+
+Фрагменты решают эту проблему.
+
+# Фрагменты с ключами
+
+Фрагменты, объявленные с помощью <React.Fragment>, могут иметь ключи. 
+
+Например, их можно использовать при создании списка определений, преобразовав коллекцию в массив фрагментов.
+
+```
+function Glossary(props) {
+  return (
+    <dl>
+      {props.items.map(item => (
+        // Без указания атрибута `key`, React выдаст предупреждение об его отсутствии
+        <React.Fragment key={item.id}>
+          <dt>{item.term}</dt>
+          <dd>{item.description}</dd>
+        </React.Fragment>
+      ))}
+    </dl>
+  );
+}
+
+```
+
+key — это единственный атрибут, допустимый у Fragment
+
+
 # Приватный роутинг ( аутентифицированные маршруты )
 
 Есть такие роуты, которые должны работать только при каки-то условия
@@ -345,6 +457,196 @@ export default class WrapperComponent extends React.Component {
             </div>
         )
     }
+}
+
+```
+
+# Введение в хуки
+
+Хуки — нововведение в React 16.8, которое позволяет использовать состояние и другие возможности React без написания классов
+
+# Что такое хук?
+
+Хук — это специальная функция, которая позволяет «подцепиться» к возможностям React. 
+
+Например, хук useState предоставляет функциональным компонентам доступ к состоянию React. Мы узнаем про другие хуки чуть позже.
+
+# Хук состояния
+
+хук состояние - useState.
+
+```
+import React, { useState } from 'react';
+
+export function Hooks() {
+    // Объявляем новую переменную состояния "count"
+    const [count, setCount] = useState(0);
+
+    // setCount - грубо говоря наш setState, который меняет поле count
+
+    const addCount = () => {
+        setCount(count + 1)
+    }
+
+    return (
+        <div>
+            <p>Вы нажали {count} раз</p>
+            <button onClick={addCount}>
+                Нажми на меня
+      </button>
+        </div>
+    );
+}
+
+```
+
+# Эквивалентный пример с классом
+
+```
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    };
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Вы кликнули {this.state.count} раз(а)</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Нажми на меня
+        </button>
+      </div>
+    );
+  }
+}
+
+```
+
+# Объявление нескольких переменных состояния
+
+```
+import React, { useState } from 'react';
+
+export function Hooks() {
+    const [count, setCount] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const addCount = () => {
+        setCount(count + 1)
+    }
+
+    const toggleOpen = () => {
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+    }
+
+    return (
+        <div>
+            <p>Вы нажали {count} раз</p>
+            <p>Is open - {isOpen}</p>
+            <button onClick={addCount}>
+                +1
+            </button>
+
+            <button onClick={toggleOpen}>
+                toggle open
+            </button>
+        </div>
+    );
+}
+
+```
+
+
+# Хук эффекта
+
+С помощью хука эффекта useEffect вы можете выполнять побочные эффекты из функционального компонента. 
+
+Он выполняет ту же роль, что и componentDidMount, componentDidUpdate и componentWillUnmount в React-классах, объединив их в единый API.
+
+useEffect прнимает 2 аргумента - коллбэк функция и массив
+
+- коллбэк срабаотывает точно также как и componentDidMount and conponentDidUpdate
+
+- массив нужен для зависимостей. Если в него передаем какую-то переменную, то при изменении этой переменной у нас будет повторно вызван useEffect 
+
+```
+import React, { useEffect, useState } from 'react';
+
+export function Hooks() {
+    const [count, setCount] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const addCount = () => {
+        setCount(count + 1)
+    }
+
+    const toggleOpen = () => {
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+    }
+
+    useEffect(() => {
+        // componentDidMount and conponentDidUpdate
+        toggleOpen(); // как только отрендериться компонент -> выполнится эта функция
+        return () => {
+            // componentWillUnmount
+        }
+    }, []) // второй агрумент для зависимостей
+
+    return (
+        <div>
+            <p>Вы нажали {count} раз</p>
+            <p>Is open - {isOpen ? 'yes' : 'no'}</p>
+            <button onClick={addCount}>
+                +1
+            </button>
+
+            <button onClick={toggleOpen}>
+                toggle open
+            </button>
+        </div>
+    );
+}
+
+```
+
+Пример на зависимости
+
+```
+import React, { useEffect, useState } from 'react';
+
+export function Hooks() {
+    const [count, setCount] = useState(0);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const addCount = () => {
+        setCount(count + 1)
+    }
+
+    const toggleOpen = () => {
+        setIsOpen((prevIsOpen) => !prevIsOpen)
+    }
+
+    useEffect(() => {
+        // при изменении count будет вызвана функция toggleOpen
+        toggleOpen()
+    }, [count])
+
+    return (
+        <div>
+            <p>Вы нажали {count} раз</p>
+            <p>Is open - {isOpen ? 'yes' : 'no'}</p>
+            <button onClick={addCount}>
+                +1
+            </button>
+
+            <button>
+                toggle open
+            </button>
+        </div>
+    );
 }
 
 ```
