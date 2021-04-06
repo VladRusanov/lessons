@@ -210,36 +210,36 @@ export default Main
  
  Вот так, к примеру, обработчик неуправляемого компонента может получить имя от элемента input:
  
- ```
+```
  import React, { Component } from 'react'
 
-class Main extends Component {
-    constructor(props) {
-        super(props)
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.input = React.createRef();
-    }
+  class Main extends Component {
+      constructor(props) {
+          super(props)
+          this.handleSubmit = this.handleSubmit.bind(this);
+          this.input = React.createRef();
+      }
 
-    handleSubmit(event) {
-        alert('Отправленное имя: ' + this.input.current.value);
-        event.preventDefault();
-    }
+      handleSubmit(event) {
+          alert('Отправленное имя: ' + this.input.current.value);
+          event.preventDefault();
+      }
 
-    render() {
-        console.log('props main:', this.props);
-        return (
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    Имя:
-                    <input type="text" ref={this.input} />
-                </label>
-                <input type="submit" value="Отправить" />
-            </form>
-        )
-    }
-}
+      render() {
+          console.log('props main:', this.props);
+          return (
+              <form onSubmit={this.handleSubmit}>
+                  <label>
+                      Имя:
+                      <input type="text" ref={this.input} />
+                  </label>
+                  <input type="submit" value="Отправить" />
+              </form>
+          )
+      }
+  }
 
-export default Main
+  export default Main
  
  ```
  
@@ -258,6 +258,7 @@ export default Main
  Изменение значения атрибута defaultValue после монтирования компонента не обновит значение в DOM.
  
 ```
+
 render() {
   return (
     <form onSubmit={this.handleSubmit}>
@@ -287,6 +288,7 @@ render() {
 
 
 ```
+
 import React from 'react';
 
 export default class WrapperComponent extends React.Component {
@@ -305,8 +307,10 @@ export default class WrapperComponent extends React.Component {
 }
 
 ```
+---
 
 ```
+
 import React, { Component } from 'react'
 import WrapperComponent from './WrapperComponent.jsx';
 import './styles.css'
