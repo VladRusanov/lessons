@@ -352,4 +352,3 @@ export default Main
 
 ```
 
-WrapperComponent оборачивает какие-то элементы и 
