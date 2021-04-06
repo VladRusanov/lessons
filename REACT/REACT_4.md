@@ -276,7 +276,12 @@ render() {
 
 ```
 
-Аналогично, <input type="checkbox"> и <input type="radio"> используют defaultChecked, а <select> и <textarea> — defaultValue.
+Аналогично, 
+
+```
+<input type="checkbox"> и <input type="radio"> используют defaultChecked, а <select> и <textarea> — defaultValue.
+
+```
 
 # props.children
 
