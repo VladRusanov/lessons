@@ -1,4 +1,4 @@
-#React.cloneElement
+# React.cloneElement
 
 ```
 React.cloneElement(
@@ -150,3 +150,131 @@ class Films extends React.Component {
 export default withData(Films) // используем нас HOC
 
 ```
+
+# React.PureComponent
+
+При разработке реакт-приложений обычно используют два типа компонентов:
+
+1) React.Component
+
+3) React.PureComponent
+
+Давайте разберемся, зачем нужен каждый из типов компонентов.
+
+Как мы уже знаем, в react lyfecycle компонентов существуют два процесса: mounting и updating.
+
+
+Mounting lifecycle выглядит так:
+
+1) constructor
+
+2) static getDerivedStateFromProps (componentWillMount — deprecated)
+
+3) render
+
+4) componentDidMount
+
+
+Updating lifecycle:
+
+1) static getDerivedStateFromProps (componentWillReceiveProps - deprecated)
+
+2) shouldComponentUpdate
+
+3) (componentWillUpdate — deprecated)
+
+4) render
+
+5) getSnapshotBeforeUpdate
+
+5) componentDidUpdate
+
+
+Разница между Component и PureComponent заключается в методе updating lifecycle: shouldComponentUpdate.
+
+В Component этот метод выглядит так:
+
+```
+shouldComponentUpdate(.....) {
+ return true;
+}
+
+```
+
+В PureComponent:
+
+```
+shouldComponentUpdate(nextProps, nextState) {
+ return !shallowEqual(nextProps, this.props) || !shallowEqual(nextState, this.state);
+}
+
+```
+
+PureComponent изначально определяет функцию, которая ответствена за принятие решения — нужно ли продолжать updating lifecycle или нет.
+
+# Разберем пример:
+
+```
+lass A extends React.Component {
+  render() {
+    return (<B props={this.props.someProps}/>  
+  }
+}
+class B extends React.PureComponent {
+  render() {
+    return (/* some data */)
+  }
+}
+
+```
+
+Вызывающий код
+
+```
+1: ReactDOM.render(<A someProps={1} />, root);
+2: ReactDOM.render(<A someProps={1} />, root);
+
+```
+
+1) Здесь, на второй строке, компонент A будет обновлен. Так как он не является чистым компонентом, и его shouldComponentUpdate вернет true;
+
+2) PureComponent B получает задачу на ререндер, но его props не изменились;
+
+3) shouldComponentUpdate класса B вернет false, так как ссылки на все поля props остались прежними. (т.е. this.props.someProps === nextProps.someProps);
+
+4) Дальнейшие методы Updating lifecycle не вызываются.
+
+
+Теперь попробуем обновить someProps:
+
+```
+1: ReactDOM.render(<A someProps={1} />, root);
+2: ReactDOM.render(<A someProps={2} />, root);
+
+```
+
+1) A ререндерится
+
+2) PureComponent B получает задачу на ререндер, его someProps изменился
+
+3) shouldComponentUpdate класса B вернет True (this.props.someProps !== nextProps.someProps);
+
+4) Методы Updating lifecycle вызываются, компонент обновляется.
+
+Если бы компонент B был объявлен не как PureComponent, а как обычный Component, то он бы обновился в обоих случаях.
+
+Таким образом, PureComponent помогает нам сократить число операций и оптимизировать наш рендер “из коробки”.
+
+Пара заметок:
+
+1) Не нужно переопределять shouldComponentUpdate, если используете PureComponent.
+
+2) Не нужно делать полное сравнение внутри shouldComponentUpdate следующим образом:
+
+```
+shouldComponentUpdate(nextProps, nextState) {
+ return !JSON.stringify(nextProps) === !JSON.stringify(this.props) || !JSON.stringify(nextState) === !JSON.stringify(this.state);
+}
+
+```
+
