@@ -278,3 +278,77 @@ shouldComponentUpdate(nextProps, nextState) {
 
 ```
 
+# Оптимизация React.lazy
+
+Функция React.lazy позволяет рендерить динамический импорт как обычный компонент.
+
+До:
+
+```
+import OtherComponent from './OtherComponent';
+
+```
+
+После:
+
+```
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
+```
+
+Она автоматически загрузит бандл, содержащий OtherComponent, когда этот компонент будет впервые отрендерен.
+
+React.lazy принимает функцию, которая должна вызвать динамический import(). 
+
+Результатом возвращённого Promise является модуль, который экспортирует по умолчанию React-компонент (export default).
+
+
+# Задержка
+
+Компонент с ленивой загрузкой должен рендериться внутри компонента Suspense, который позволяет нам показать запасное содержимое (например, индикатор загрузки) пока происходит загрузка ленивого компонента.
+
+```
+import React, { Suspense } from 'react';
+
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+
+function MyComponent() {
+  return (
+    <div>
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <OtherComponent />
+      </Suspense>
+    </div>
+  );
+}
+
+```
+
+Проп fallback принимает любой React-элемент, который вы хотите показать, пока происходит загрузка компонента. 
+
+Компонент Suspense можно разместить в любом месте над ленивым компонентом. 
+
+Кроме того, можно обернуть несколько ленивых компонентов одним компонентом Suspense.
+
+```
+import React, { Suspense } from 'react';
+
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+const AnotherComponent = React.lazy(() => import('./AnotherComponent'));
+
+function MyComponent() {
+  return (
+    <div>
+      <Suspense fallback={<div>Загрузка...</div>}>
+        <section>
+          <OtherComponent />
+          <AnotherComponent />
+        </section>
+      </Suspense>
+    </div>
+  );
+}
+
+```
+
+
