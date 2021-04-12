@@ -187,6 +187,94 @@ export default App;
 
 ```
 
+# Контекст вместе с хуками
+
+```
+const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#eeeeee"
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222"
+  }
+};
+
+const ThemeContext = React.createContext(themes.light);
+
+function App() {
+  return (
+    <ThemeContext.Provider value={themes.dark}>
+      <Toolbar />
+    </ThemeContext.Provider>
+  );
+}
+
+function Toolbar(props) {
+  return (
+    <div>
+      <ThemedButton />
+    </div>
+  );
+}
+
+function ThemedButton() {
+  const theme = useContext(ThemeContext);
+  return (
+    <button style={{ background: theme.background, color: theme.foreground }}>
+      Я стилизован темой из контекста!
+    </button>
+  );
+}
+
+```
+
+# хук useCallback
+
+```
+const memoizedCallback = useCallback(() => {
+    doSomething(a, b);
+  }, [a, b]);
+
+```
+
+Возвращает мемоизированный колбэк.
+
+Эта функция сработает только есть занчение в зависимостях поменялось
+
+Пример:
+
+```
+import React, { useState, useCallback, useEffect } from 'react';
+
+function App() {
+  const [val, setVal] = useState('');
+
+  const randomInteger = (min, max) => {
+    let rand = min + Math.random() * (max + 1 - min);
+    return Math.floor(rand);
+  }
+
+  const changeValue = useCallback(() => {
+    setVal(randomInteger(1,3))
+  }, [randomInteger(1,3)]) // Только если поменяется рандомное число от 1 до 3, то мы вызываем функцию и обновляем состояние
+
+  useEffect(() => {
+    console.log('update');
+  }, [val])
+
+  return (
+    <button onClick={changeValue}>
+      {val}
+    </button>
+  );
+}
+
+export default App;
+
+
+```
 
 # Redux
 
