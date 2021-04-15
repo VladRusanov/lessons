@@ -11,6 +11,16 @@ npm i redux-devtools-extension
 
 И надо установить плагин для браузера "redux developer tools"
 
+Создайте папку store, в которой будут:
+
+файл store.js
+
+файл rootReducer.js
+
+папка actions -> файл action.js
+
+папка reducers -> файл dataReducer.js
+
 # Что такое Redux
 
 Это менеджер состояний. Редакс стор хранит в себе данные, которые могутбыть использованы где угодно в приложении.
@@ -26,6 +36,27 @@ npm i redux-devtools-extension
 **Неизменяемое дерево состояний доступно только для чтения, изменить ничего напрямую нельзя. **
 
 **Изменения возможны только при отправке action (действия).**
+
+# Store 
+
+Что такое store
+
+Это и есть то место где будут храниться все наши данные
+
+Как его создать?
+
+```
+// store.js
+import { createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+import rootReducer from './rootReducer.js'
+
+const store = createStore(rootReducer, composeWithDevTools())
+export default store
+
+```
+
 
 # Действия (action)
 
@@ -80,6 +111,8 @@ action говорит, что в прложении что-то поменяло
 Как его создать?
 
 ```
+// dataReducer.js
+
 const initialState = { // тут уже конфигурация базового состояния для нашего редакс-стора
     data: 1
 }
@@ -101,8 +134,147 @@ export default function dataReducer(state = initialState, action) {
 
 Этот редьюсер получает доступ к типу экшена, который вызвался в приложении, и проверят через switch этот тип. 
 
-Если тип экшена под что-то подошел, то он забирает payload из этого экшена и записывает новые данные в поле
+Если тип экшена под что-то подошел, то он забирает payload из этого экшена и записывает новые данные в нужное нам поле
 
 
+И таких редьюсеров в нас может быть очень многоооооооооо
+
+# rootReducer
+
+Это точно такой же редьюсер как и все остальные, только он должен объединить все остальные редьюсеры
+
+И именно этот rootReducer вписывается в store
+
+```
+import { combineReducers } from 'redux';
+
+import dataReducer from './reducers/dataReducer.js';
+
+export default combineReducers({
+    dataReducer,
+    // тут будут все остальные редьюсеры
+  })
+
+```
+
+# Как вызывать экшены
+
+!!!! Просто напрямую написать вызов action creator нельзя !!!!
+
+Чтобы вызвать action creator нам нужен dispatcher, которые будет явно говорить, что это вызов именно redux action, а не просто функции
+
+Как создать этот диспатчер
+
+```
+
+import React from 'react';
+import { useDispatch } from 'react-redux'
 
 
+export const TestComponent = (props) => {
+  const dispatcher = useDispatch();
+  dispatcher(/* Тут уже будет вызов какого-то actions creator */);
+  
+}
+
+```
+
+dispatcher нам создает хук - useDispatch()
+
+dispatcher принимает 1 аргумент - нужные нам вызов actions creator
+
+
+# пример использования всего этого
+
+Давайте создадим стор для нащих данных. Пусть в нашем сторе будет одно поле - data
+
+Пусть будет компонент, в котором будет кнопка и по нажатия на эту кнопку мы будем менять нашу data на какое-то новое значение
+
+
+1. Создадим store
+
+```
+// store.js
+import { createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+import rootReducer from './rootReducer.js'
+
+const store = createStore(rootReducer, composeWithDevTools())
+export default store
+
+
+```
+
+2. Создадим rootReducer
+
+```
+// rootReducer.js
+
+import dataReducer from './reducers/dataReducer.js';
+import { combineReducers } from 'redux';
+
+export default combineReducers({
+    dataReducer,
+    // тут будут все остальные редьюсеры
+})
+
+```
+
+3. Создадим редьюсер
+
+```
+// dataReducer.js
+
+const initialState = {
+    data: 1
+}
+
+export default function dataReducer(state = initialState, action) {
+    switch (action.type) {
+        case 'SET_NEW_DATA':
+            return {
+                data: action.payload
+            };
+        default:
+            return state;
+    }
+}
+
+```
+
+4. Создадим Action Creator
+
+```
+// action.js
+export const addCounter = (newData) => {
+    return {
+        type: 'SET_NEW_DATA',
+        payload: newData
+    }
+}
+
+```
+
+5. Создадим наш компонент
+
+```
+import React from 'react';
+import { useDispatch } from 'react-redux'
+import { addCounter } from '../store/action'
+
+export const Test = () => {
+    const dispatcher = useDispatch();
+
+    const test = () => {
+        dispatcher(addCounter(5));
+    }
+
+    return (
+        <button onClick={test}>Hello</button>
+    )
+}
+
+```
+
+Открывает консоль redux(то расширение, которое вы качали. Оно находиться в дев тулах браузера) -> Тыкаем на кнопочку -> Радуемся 
