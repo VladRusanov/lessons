@@ -278,3 +278,98 @@ export const Test = () => {
 ```
 
 Открывает консоль redux(то расширение, которое вы качали. Оно находиться в дев тулах браузера) -> Тыкаем на кнопочку -> Радуемся 
+
+
+# Как получить доступ к данным в сторе
+
+Для этого используется еще один хук - useSelect()
+
+Этот хук нужен для подписки на обновления поле в сторе 
+
+Это хук прнимает в себя колл бэк функция, которая приминает в меня (в аргумент) весь наш стор. Эта функция должна вернуть поле из стора, которая нам нужно
+
+```
+const { data } = useSelector(({ dataReducer: { data } }) => ({ // достаем data из поля dataReducer в сторе
+        data // возвращаем это поле
+}));
+
+```
+
+Давайте допишем наш компонент, и сделать так, чтобы выводилось значение из стора на страницу
+
+```
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux'
+import { addCounter } from '../store/action'
+
+export const Test = () => {
+    const dispatcher = useDispatch();
+    const { data } = useSelector(({ dataReducer: { data } }) => ({
+        data
+    }));
+
+    const test = () => {
+        dispatcher(addCounter(5));
+    }
+
+    return (
+        <button onClick={test}>{data}</button>
+    )
+}
+
+```
+
+# тоже самое, но классами
+
+Тут все чуть чуть сложнее
+
+У нас появляются 3 новые вещи
+
+- mapStateToProps
+
+- mapDispatchToProps
+
+- connect
+
+
+mapStateToProps - Это функция, которая в аргумент принимает весь стор. Эта функция должна вернуть обьект с теми свойствами, которые нам нужны в компоненте
+
+mapDispatchToProps - Это обьект, который кидает нужные нам экшены в компонент
+
+connect - НОС, которые собирает mapStateToProps и mapDispatchToProps и кидает это все в компонент
+
+```
+import React from 'react'
+import { connect } from 'react-redux'
+
+import { addCounter } from '../store/action'
+
+class Test2 extends React.Component {
+    click = () => {
+        console.log(1);
+        this.props.addCounter(5)
+    }
+
+    render() {
+        return (
+            <>
+                <button onClick={this.click}>Click</button>
+                {this.props.someData}
+            </>
+        )
+    }
+}
+
+const mapStateToProps = (state) => ({
+    // Подписываеся на обновление поля data в сторе
+    someData: state.dataReducer.data // говорим, что хотим кинуть в пропсы компонента поле someData, которое хранит в себе значние из стора
+})
+
+const mapDispatchToProps = {
+    addCounter, // говорим, что хотим кинуть в пропсы компонента action addCounter
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Test2) // Собираем это все вместе и кидам в компонент
+
+
+```
