@@ -57,6 +57,29 @@ export default store
 
 ```
 
+# Provider
+
+Чтобы дать доступ к стору всем компонентам нам надо обернуть все в <Providor>
+
+```
+// App.jsx
+import React from 'react';
+import { Test } from './components/Test.jsx';
+import { Provider } from 'react-redux'
+import store from './store/store.js';
+
+function App() {
+  return (
+    <Provider store={store}>
+      <Test />
+    </Provider>
+  );
+}
+
+export default App;
+
+```
+
 
 # Действия (action)
 
