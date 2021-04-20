@@ -88,3 +88,31 @@ export const myThunkRequest = (api) => (dispatch) => {
 ```
 
 Редьюсер описывается точно так же, тут ничего нового
+
+
+# Помимо dispatch-а наш мидлвар принимает еще и getState функцию
+
+Функция, возвращаемая асинхронным action creator'ом с помощью Redux-Thunk, также принимает getState метод как второй аргумент, что позволяет получать стейт прямо внутри action creator'а:
+
+```
+export const myThunkRequest = (api) => (dispatch, getState) => {
+    dispatch(setLoading(true));
+    console.log(getState()); // наш стор
+    const promise = fetch(api);
+    promise
+        .then(data => {
+            return data.json()
+        })
+        .then(data => {
+            dispatch(getDataSuccess(data))
+        })
+        .catch(error => {
+            dispatch(getDataFailure(error))
+        })
+        .finally(() => {
+            dispatch(setLoading(false))
+        })
+
+}
+
+```
