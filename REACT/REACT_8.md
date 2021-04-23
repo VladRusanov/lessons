@@ -119,3 +119,4 @@ export const myThunkRequest = (api) => (dispatch, getState) => {
 
 # HomeWork
 
+Берем апи с фильмами, делаем запрос через санк и отображаем его все на страницу (как уже делали)
