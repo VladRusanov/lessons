@@ -26,24 +26,11 @@ npm i redux-saga
 
 Теперь мы можем реализовать логику для нашего вотчера 
 
-```
-import { call, put, takeEvery } from 'redux-saga/effects'
+![image](https://user-images.githubusercontent.com/16369478/115866525-7143d600-a442-11eb-9ae8-7addb773e49c.png)
 
 
-// put - это наш новый диспатч внутри саги. Он делает "тоже самое" что и обычный dispatch
-// call - Вместо вызова асинхронного реквеста напрямую, 
-// метод call вернет только объект описывающий эту операцию и redux-saga сможет позаботиться о вызове и возвращении результатов в функцию-генератор.
 
-function* someWorkerSaga() {
-   put(someAction(1)); // просто вызов нашего action creator, в который отдаем данные
-}
-
-export function* watcherSaga() {
-    yield takeEvery('TRIGGER_SAGA', someWorkerSaga)
-}
-
-```
-
+# Давайте сделаем нашу первую сагу
 
 # Для запуска нашей Саги нужно:
 
