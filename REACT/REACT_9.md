@@ -28,6 +28,17 @@ npm i redux-saga
 
 ![image](https://user-images.githubusercontent.com/16369478/115866525-7143d600-a442-11eb-9ae8-7addb773e49c.png)
 
+put возвращает объект с инструкциями для промежуточного слоя (middleware) — отправить действие.
+
+Эти возвращаемые объекты называются Эффекты (Effects). Ниже пример эффекта возвращаемого методом call:
+
+![image](https://user-images.githubusercontent.com/16369478/115868271-e1535b80-a444-11eb-9ebe-2b2175710023.png)
+
+
+# Пример на асинхронный запрос
+
+![image](https://user-images.githubusercontent.com/16369478/115868199-bf59d900-a444-11eb-88fa-d18b1dec1a14.png)
+
 
 
 # Давайте сделаем нашу первую сагу
