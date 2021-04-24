@@ -137,10 +137,11 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 // метод call вернет только объект описывающий эту операцию и redux-saga сможет позаботиться о вызове и возвращении результатов в функцию-генератор.
 
 // Это воркер, который будет делать какие-то действия
-function* someWorkerSaga() {
+function* someWorkerSaga(action) {
+    console.log(action) // {type: "TRIGGER_SAGA", url: "https://api.themoviedb.org/3/search/movie?api_key=fcd1837ca404652c4523e6b6e90d3aab&query=girls&page=1&include_adult=true}
     try {
         const dataFromServer = yield call(() => 
-            fetch('https://api.themoviedb.org/3/search/movie?api_key=fcd1837ca404652c4523e6b6e90d3aab&query=girls&page=1&include_adult=true')
+            fetch(action.url)
                 .then(items => items.json())
         )
         yield put(setDataValue(dataFromServer))
@@ -170,10 +171,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux'
 
 export const Test = () => {
-    const dispatcher = useDispatch();
-
+    const apiQuery = 'https://api.themoviedb.org/3/search/movie?api_key=fcd1837ca404652c4523e6b6e90d3aab&query=girls&page=1&include_adult=true'
+    
+    const dispatcher = useDispatch(); 
+    
     const trigger = () => {
-        dispatcher({ type: 'TRIGGER_SAGA' }) // надо надо вызвать экшен и тем типом, который в вотчере
+        dispatcher({ type: 'TRIGGER_SAGA', url: apiQuery }) // надо вызвать экшен с тем типом, который в вотчере.
     }
 
     return (
