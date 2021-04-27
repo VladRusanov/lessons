@@ -35,44 +35,35 @@ export default App;
 ```
 
 ```
-import React from 'react';
+import React from 'react'
 import { useDispatch } from 'react-redux'
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 
 export const Test = () => {
+    const dispatcher = useDispatch();
     const query = gql`
         query Login($name: String!, $password: String!) {
             login(login: $name, password: $password)  
         } 
     `;
-    const mutation = gql`
-        mutation reg($name: String!) {
-            UserUpsert(user: {login: $name, nick: $name, password: $name, acl: ["asd"]}) {
-                createdAt,
-                login,
-                nick
-            }
-    }`;
+    // refetch - метод для повторного запроса
+    // const { data, refetch } = useQuery(query, { // Вызывается сразу же
+    //     variables: { name: 'VLAD', password: 'VLAD' },
+    //     notifyOnNetworkStatusChange: true
+    // });
 
-    const runningQuery = useQuery(query, {
-        variables: { breed },
-        notifyOnNetworkStatusChange: true
-    });
-    const [action] = useMutation(mutation);
+    // LoginRequest - метод запроса
+    const [LoginRequest, { data, status }] = useLazyQuery(query); // Сразу не вызывается, можно будет вызвать когда угодно
 
-    const trigger = () => {
-        action({ variables: { name: 'VLAD' } });
+    const newRequest = () => {
+        // refetch({ variables: { name: 'asd', password: 'asd' } })
+        LoginRequest({ variables: { name: 'VLAD', password: 'VLAD' } });
     }
-
-    const login = () => {
-        console.log('runningQuery: ', runningQuery);
-    }
-
+    console.log('data: ', data);
     return (
         <>
-            <button onClick={trigger}>Registrate user</button>
-            <button onClick={login}>Login</button>
+            <button onClick={newRequest}>Get Data</button>
         </>
     )
 }
