@@ -7,6 +7,8 @@ npm install apollo-boost @apollo/react-hooks graphql
 
 http://doc.a-level.com.ua/frontend-graphql-backs
 
+Дока -  наше все (https://www.apollographql.com/docs/)
+
 1. Даем доступ к клиенту graphQL
 
 ```
