@@ -1,3 +1,5 @@
+# Повторяем графКл
+
 # PropTypes and Default Prop
 
 # Проверка типов с помощью PropTypes
