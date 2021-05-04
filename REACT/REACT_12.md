@@ -1,5 +1,54 @@
 # Повторяем графКл
 
+Просто graphQL без apollo
+
+```
+export const getGQL = async (headers = {}, query = "", variables = {}) => {
+  try {
+    const result = await fetch("http://chat.fs.a-level.com.ua/graphql", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        ...headers,
+      },
+      body: JSON.stringify({ query, variables }),
+    }).then((res) => res.json());
+
+    return result;
+  } catch (error) {
+    return new Error("getGQL Error");
+  }
+};
+
+```
+
+Как использовать?
+
+Теперь на не надо писать эти useMutations и т.д.
+
+Используем нашу функцию (getGQL) просто как обычный fetch
+
+```
+export function testAction(testData) {
+  return {
+    status: 'ACTION_STATUS',
+    payload: getGQL(
+      {
+        Authorization: "Bearer " + localStorage.authToken,
+      },
+      `mutation test{
+             test(test: testData)
+      }`
+    }
+  );
+}
+
+```
+
+Мы создали обычный ation, который можно будет связать с редаксов и т.д.
+
+
 # PropTypes and Default Prop
 
 # Проверка типов с помощью PropTypes
