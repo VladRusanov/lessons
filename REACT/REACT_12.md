@@ -48,6 +48,34 @@ export function testAction(testData) {
 
 Мы создали обычный ation, который можно будет связать с редаксов и т.д.
 
+# Пример с сагой:
+
+```
+unction* everySearch({ query }) {
+  const backQuery = `/${query}/`;
+
+  const userToken = yield select((state) => state.auth.jwt); // через select (эффект) мы достаем данные из стора
+  const users = yield getGQL(
+    {
+      Authorization: "Bearer " + userToken,
+    },
+    `query User($query: String){
+          UserFind(query: $query){
+            _id
+            login
+            nick
+            avatar {
+              _id
+              url
+            }
+          }
+        }`,
+  );
+  yield put(actionSearchResult(users.data.UserFind));
+  console.log("search query finish", query);
+}
+
+```
 
 # PropTypes and Default Prop
 
