@@ -141,3 +141,44 @@ npm i jsonwebtoken
 
 ```
 
+```
+import jwt from 'jsonwebtoken';
+
+const token = localStorage.getItem('accessToken');
+const user = jwt.decode(token); // декодируем токен и получаем данные
+
+```
+
+К нашему примеру
+
+```
+import jwt from 'jsonwebtoken';
+
+const token = localStorage.getItem('accessToken');
+const user = jwt.decode('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE1ODEzNTcwMzl9.E4FNMef6tkjIsf7paNrWZnB88c3WyIfjONzAeEd4wF0');
+
+```
+
+Получаем 
+
+```
+{user_id: 1, exp: 1581357039}
+
+```
+
+Чтобы создать токен
+
+```
+var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
+
+```
+
+
+Еще пример на создание 
+
+```
+const older_token = jwt.sign({ foo: 'bar', iat: Math.floor(Date.now() / 1000) - 30 }, 'shhhhh'); // iat - время токена
+const token = jwt.decode(older_token)
+console.log('test: ', test);
+
+```
