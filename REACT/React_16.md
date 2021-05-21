@@ -180,3 +180,168 @@ test('renders learn react link', () => { // название теста
 
 ![image](https://user-images.githubusercontent.com/16369478/119118445-dd5e2d80-ba32-11eb-9296-f713ed2a7686.png)
 
+# Идем дальше
+
+У нас есть вот такое приложение
+
+![image](https://user-images.githubusercontent.com/16369478/119139037-3fc32800-ba4b-11eb-8f23-9219cda7619d.png)
+
+
+![image](https://user-images.githubusercontent.com/16369478/119139054-45207280-ba4b-11eb-871d-226c8ba03729.png)
+
+Есть инпут, в который мы можем что-то ввести.
+
+То что ввели отображается под инпутом.
+
+Давайте протестим этот компонент
+
+Сам компонент
+
+```
+import React, { useState } from 'react';
+
+const Search = ({ value, onChange, children }) => (
+  <div>
+    <label htmlFor="search">{children}</label>
+    <input id="search" type="text" value={value} onChange={onChange} />
+  </div>
+)
+
+function App() {
+  const [search, setSearch] = useState('');
+
+  const handleChange = ({ target }) => {
+    setSearch(target.value)
+  }
+
+  return (
+    <div>
+      <Search value={search} onChange={handleChange}>Search:</Search>
+      <p>Searches for {search ? search : '...'}</p>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+Теперь давайте напишем тест для этого всего
+
+Тут мы проверим отрендерился ли конпонент вообще
+
+```
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', () => { // Название теста
+    render(<App />); // рендерим наш компонент
+    screen.debug();
+    // флаг i - Нечувствительность к регистру
+    expect(screen.getByText(/Search:/i)).toBeInTheDocument(); // ищем текст на странице
+  })
+})
+
+```
+
+
+Искать что-то можно не только по тексту
+
+Можно искать по роли элемента
+
+Роли элементов можно посмотреть в доке react-testing lib
+
+К примеру:
+
+Роль input - textbox и т.д.
+
+Давайте допишем нащ тест
+
+```
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', () => { // Название теста
+    render(<App />);
+    expect(screen.getByText(/Search:/i)).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument(); // Поиск по роли
+  })
+})
+
+
+```
+
+Есть еще 4 метода для поиска
+
+- getByLabelText - ищет элемент по тексту в лейбле
+
+- getByPlaceholderText - ищет элемент по тексту в поейсхолдере
+
+- getByAltText - botn 'ktvtyns gj fknthyfnbdyjve ntrcne
+
+- getByDisplayValue - поиск элемента по отображаемому значению или по атрибуту value
+
+
+Пример:
+
+```
+import React, { useState } from 'react';
+
+const Search = ({ value, onChange, children }) => (
+  <div>
+    <label htmlFor="search">{children}</label>
+    <input
+      id="search"
+      placeholder="search text..."
+      type="text"
+      value={value}
+      onChange={onChange}
+    />
+  </div>
+)
+
+function App() {
+  const [search, setSearch] = useState('');
+
+  const handleChange = ({ target }) => {
+    setSearch(target.value)
+  }
+
+  return (
+    <div>
+      <img alt="search image" src="" />
+      <Search value={search} onChange={handleChange}>Search:</Search>
+      <p>Searches for {search ? search : '...'}</p>
+    </div>
+  );
+}
+
+export default App;
+
+
+```
+
+Тесты:
+
+```
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', () => { // Название теста
+    render(<App />);
+    expect(screen.getByText(/Search:/i)).toBeInTheDocument();
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    expect(screen.getByLabelText(/Search:/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('search text...')).toBeInTheDocument();
+    expect(screen.getByAltText('search image')).toBeInTheDocument();
+    // используется для дефолтных элементов в форме
+    expect(screen.getByDisplayValue('123')).toBeInTheDocument();
+  })
+})
+
+
+```
+
