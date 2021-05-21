@@ -272,6 +272,7 @@ describe('App', () => { // Описывает с каким компоненто
 
 
 ```
+Типы поиска
 
 Есть еще 4 метода для поиска
 
@@ -345,3 +346,401 @@ describe('App', () => { // Описывает с каким компоненто
 
 ```
 
+# Варианты поиска
+
+- getBy...
+
+- queryBy...
+
+- findBy...
+
+![image](https://user-images.githubusercontent.com/16369478/119155071-7739d080-ba5b-11eb-8264-201b83788711.png)
+
+# В чем разница queryBy... и getBy...
+
+
+getBy... - возвращает либо элемент, лмбо ошибку
+
+Затрудняет проверку элементов, которых быть и не должно
+
+На примере:
+
+```
+У нас в компоненте есть это
+<p>Searches for {search ? search : '...'}</p>
+
+```
+
+Хочу эту логику протестить
+
+```
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', async () => { // Название теста
+    render(<App />);
+    expect(screen.getByText(/Search for React/i)).toBeNull(); // ошибка
+  })
+})
+
+```
+
+Тут мы получаем ошибку
+
+Почему?
+
+```
+<p>Searches for {search ? search : '...'}</p> // не успевает отработать
+
+```
+
+Чтобы починить это нам надо заменить getByText на queryByText
+
+```
+it('render App component', async () => { // Название теста
+    render(<App />);
+    expect(screen.queryByText(/Search for React/i)).toBeNull();
+  })
+
+```
+Каждый раз когда мы утверждаем, что элеента нет в разметке, то надо использовать queryBy...
+
+# А в чем тогда прикол findBy...
+
+Все просто. findBy... используется для асинхронныъ элементов, который изначально не было, а потом как-то появились
+
+Пример:
+
+```
+import React, { useEffect, useState } from 'react';
+
+const getUser = () => Promise.resolve({ id: 1, name: 'Vlad' });
+
+const Search = ({ value, onChange, children }) => (
+  <div>
+    <label htmlFor="search">{children}</label>
+    <input
+      id="search"
+      type="text"
+      value={value}
+      onChange={onChange}
+      placeholder="search text..."
+    />
+  </div>
+)
+
+function App() {
+  const [search, setSearch] = useState('');
+  const [user, setUser] = useState('');
+
+  const handleChange = ({ target }) => {
+    setSearch(target.value)
+  }
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const user = await getUser();
+      setUser(user);
+    }
+    loadUser();
+  }, [])
+
+  return (
+    <div>
+      {user && <h2>Logged in as {user.name}</h2>}
+      <img alt="search image" src="" />
+      <Search value={search} onChange={handleChange}>Search:</Search>
+      <p>Searches for {search ? search : '...'}</p>
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+Тест для этого:
+
+```
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', async () => { // Название теста
+    render(<App />);
+    expect(screen.queryByText(/Logged in as/i)).toBeNull();
+    expect(await screen.findByText(/Logged in as/i)).toBeInTheDocument();
+    // Нам не важно какие данные будут в ответе
+  })
+})
+
+
+```
+
+А что если нам надо получить много элементов??
+
+Используется 
+
+- getByAll...
+
+- findByAll...
+
+- queryByAll...
+
+![image](https://user-images.githubusercontent.com/16369478/119157864-473ffc80-ba5e-11eb-99ef-a5bd4cfb20de.png)
+
+
+- Нужно найти элемент - getBy
+
+- Нужно показать, что элемента нет в DOM - queryBy...
+
+- Хотите изначально показать, что элемента не в DOM, а потом он там будет - findBy...
+
+- Если элементов несколько, то ...allBy...
+
+# Список утверждений
+
+![image](https://user-images.githubusercontent.com/16369478/119158450-e49b3080-ba5e-11eb-9602-00522bbd8298.png)
+
+
+# Давайте напишем новый тест для проверки на required в интупе
+
+```
+
+...
+
+<input
+      id="search"
+      type="text"
+      value={value}
+      onChange={onChange}
+      placeholder="search text..."
+      required={true}
+/>
+...
+
+```
+
+Добавим новый тест
+
+```
+import { getByPlaceholderText, render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', async () => { // Название теста
+    render(<App />);
+    expect(screen.queryByText(/Logged in as/i)).toBeNull();
+    screen.debug()
+    expect(await screen.findByText(/Logged in as/i)).toBeInTheDocument();
+    screen.debug()
+    // Нам не важно какие данные будут в ответе
+  })
+
+  it('is input required', () => { // новый тест
+    render(<App />);
+    expect(screen.getByPlaceholderText('search text...')).toBeRequired();
+  }) 
+})
+
+
+```
+
+Если нам нужно отрицание, то ставим not
+
+```
+    expect(screen.getByPlaceholderText('search text...')).not.toBeRequired();
+
+```
+
+Еще примеры тестов
+
+```
+import { getByPlaceholderText, render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', async () => { // Название теста
+    render(<App />);
+    expect(screen.queryByText(/Logged in as/i)).toBeNull();
+    screen.debug()
+    expect(await screen.findByText(/Logged in as/i)).toBeInTheDocument();
+    screen.debug()
+    // Нам не важно какие данные будут в ответе
+  })
+
+  it('is input required', () => {
+    render(<App />);
+    expect(screen.getByPlaceholderText('search text...')).toBeRequired();
+  })
+
+  it('is input empty', () => {
+    render(<App />);
+    expect(screen.getByPlaceholderText('search text...')).toBeEmptyDOMElement();
+  })
+  
+  it('has ID attr', () => {
+    render(<App/>);
+    expect(screen.getByPlaceholderText('search text...')).toHaveAttribute('id');
+  })
+})
+
+
+```
+
+
+# События
+
+имитация взаимодействия юзера с какими-то элементами
+
+Для этого используется fireEvent
+
+```
+import { fireEvent, render, screen } from '@testing-library/react';
+
+
+```
+
+Пример теста на ввод чего-то в инпут
+
+```
+import { fireEvent, render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', async () => { // Название теста
+    render(<App />);
+    screen.debug();
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'React' }
+    })
+    screen.debug();
+  })
+})
+
+```
+
+Это будет работать, но мы получим ворнинг
+
+Этот ворнинг говорит, что наш компонент участвует в каких-то асинхронных действиях
+
+Когда есть какая-то асинхронная операция, то мы должны быть уверенны, что компонент с ней справится
+
+Это можно сделать через функцию act
+
+Нам надо дождаться результата выполнения промиса
+
+Фиксим:
+
+Сам компонент:
+
+```
+import React, { useEffect, useState } from 'react';
+
+const getUser = () => Promise.resolve({ id: 1, name: 'Vlad' });
+
+const Search = ({ value, onChange, children }) => (
+  <div>
+    <label htmlFor="search">{children}</label>
+    <input
+      id="search"
+      type="text"
+      value={value}
+      onChange={onChange}
+      placeholder="search text..."
+      required={true}
+    />
+  </div>
+)
+
+function App() {
+  const [search, setSearch] = useState('');
+  const [user, setUser] = useState('');
+
+  const handleChange = ({ target }) => {
+    setSearch(target.value)
+  }
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const user = await getUser();
+      setUser(user);
+    }
+    loadUser();
+  }, [])
+
+  return (
+    <div>
+      {user && <h2>Logged in as {user.name}</h2>}
+      <img alt="search image" src="" />
+      <Search value={search} onChange={handleChange}>Search:</Search>
+      <p>Searches for {search ? search : '...'}</p>
+    </div>
+  );
+}
+
+export default App;
+
+
+```
+
+Тест:
+
+```
+import { fireEvent, render, screen } from '@testing-library/react';
+import App from './App';
+
+describe('App', () => { // Описывает с каким компонентом мы работаем
+  it('render App component', async () => { // Название теста
+    render(<App />);
+    await screen.findByText(/Logged in as/i)
+    expect(screen.queryByText(/Searches for React/i)).toBeNull();
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'React' }
+    })
+    expect(screen.queryByText(/Searches for React/i)).toBeInTheDocument();
+    screen.debug();
+  })
+})
+
+
+```
+
+# Давайте напишем тест, который проверят клики по чекбоксам
+
+```
+describe('events', () => {
+  it('checkbox click', () => {
+    const handleChange = jest.fn();
+    const { container } = render(
+      <input type="checkbox" onChange={handleChange} />
+    )
+    const checbox = container.firstChild;
+    expect(checbox).not.toBeChecked();
+    fireEvent.click(checbox);
+    expect(handleChange).toBeCalledTimes(1);
+    expect(checbox).toBeChecked();
+  })
+});
+
+```
+
+container - возвращает ссылку на DOM элемент, в которйы смонтирован наш элемент
+
+для того, чтобы обратиться к нашему элементу используем свойство .firstChild
+
+# Давайте напишет тест, который будет проверять фокус на инпуте
+
+```
+ it('input focus', () => {
+    const { getByTestId } = render(
+      <input type="checkbox" data-testid="my-input" />
+    )
+    const input = getByTestId('my-input');
+    expect(input).not.toHaveFocus();
+    input.focus();
+    expect(input).toHaveFocus();
+  })
+
+```
