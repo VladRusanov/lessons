@@ -200,7 +200,48 @@ export default App;
 Нам надо сделать мок библиотеки axios
 
 
+```
+jest.mock('axios');
 
+const hits = [ // описывает ответ от сервера
+    {
+        onjectID: '1', title: 'Angular'
+    },
+    {
+        onjectID: '2', title: 'React'
+    },
+    {
+        onjectID: '3', title: 'Vue'
+    }
+]
+
+describe('App', () => {
+    it('fetch news from an API', async () => {
+        axios.get.mockImplementationOnce(() => Promise.resolve({ data: { hits } })); // переписываем реализацию метода get
+        const { getByRole, findAllByRole } = render(<App />);
+        userEvent.click(getByRole('button'));
+        const items = await findAllByRole('listitem');
+        expect(items).toHaveLength(3);// проверям, что в списке 3 элемента
+
+        // Что еще можно протестить?
+        // Давайте протестим вызов функции get
+        expect(axios.get).toHaveBeenCalledTimes(1);
+        // С какими данными был вызван запрос
+        expect(axios.get).toHaveBeenCalledWith('http://hn.algolia.com/api/v1/search?query=React');
+    })
+
+    // Давайте протести негативный ответ
+
+    it('fetch news from an API and reject', async () => {
+        axios.get.mockImplementationOnce(() => Promise.reject(new Error())); // переписываем реализацию метода get
+        const { getByRole, findByText } = render(<App />);
+        userEvent.click(getByRole('button'));
+        const message = await findByText(/We have errors/i);
+        expect(message).toBeInTheDocument();
+    })
+})
+
+```
 
 # Повторим паатеры
 
