@@ -198,3 +198,22 @@ export default App;
 Начинаем с подмены данных
 
 Нам надо сделать мок библиотеки axios
+
+
+
+
+# Повторим паатеры
+
+Что за паттерн?
+
+class Person {
+  constructor() {
+    if (typeof Person.instance === 'object') {
+      return Person.instance;
+    }
+    Person.instance = this;
+    return this;
+  }
+}
+
+Напишите мне фабирку и абстрактную фабрику)
