@@ -139,4 +139,62 @@ it('select option', () => {
 
 # Асинхронное тестирование запросов
 
+Запрос будем делать сюда - 'http://hn.algolia.com/api/v1/search'
 
+Есть такой компонент
+
+```
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const baseURL = 'http://hn.algolia.com/api/v1/search';
+
+function App() {
+  const [data, setData] = useState([]);
+  const [error, setError] = useState('');
+
+  const handleData = async () => {
+    try {
+      const res = await axios.get(`${baseURL}?query=React`);
+      setData(res.data.hits);
+    } catch (error) {
+      console.log('error: ', error);
+      setError(error)
+    }
+  }
+
+  const spawnData = () => {
+    return data.map(({ objectID, url, title }) => {
+      return (
+        <li key={objectID}>
+          <a href={url}>{title}</a>
+        </li>
+      )
+    });
+  }
+
+  return (
+    <div>
+      <button onClick={handleData}>Fetch data</button>
+
+      {error && <h2>We have errors</h2>}
+
+      {spawnData()}
+    </div>
+  )
+}
+
+export default App;
+
+
+```
+
+Давайте его тестить
+
+Сначала мы мокаем функции, через которые мы делаем запрос
+Потом мы сами конструируем ответ от сервиса
+И проверяем состояние нашего компонента или результат отрисовки
+
+Начинаем с подмены данных
+
+Нам надо сделать мок библиотеки axios
