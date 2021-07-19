@@ -702,6 +702,8 @@ componentDidMount() {
 
 # HomeWork
 
+0. Сделать форму Sign Up
+
 1. Сделать инпут range. При перетаскивании ползунка в range мы записываем value из range в новый инпут
 
 минимальное значение range - 1
