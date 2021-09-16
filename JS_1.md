@@ -263,7 +263,7 @@ JavaScript - один из самых популярных языков прог
   console.log(typeof NaN); // number
   console.log(typeof 'String'); // string
   console.log(typeof true); // boolean
-  console.log(typeof {name: 'Sally'}); // number
+  console.log(typeof {name: 'Sally'}); // object
   console.log(typeof null); // object
   console.log(typeof undefined); // undefine
   
@@ -599,7 +599,7 @@ JavaScript - один из самых популярных языков прог
 
   ```
   
-  3) Вівести в консоль примеры всех типо данных
+  3) Вывести в консоль примеры всех типов данных
   
   ```
   typeof (1); // number
