@@ -89,7 +89,7 @@ ArrayBuffer и бинарные массивы являются частью ECM
 
 **Объект Blob состоит из необязательной строки type (обычно MIME-тип) и blobParts – последовательности других объектов Blob, строк и BufferSource.**
 
-![Ing]https://learn.javascript.ru/article/blob/blob.svg
+![Ing](https://learn.javascript.ru/article/blob/blob.svg)
 
 # File и FileReader
 
