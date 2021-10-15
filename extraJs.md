@@ -91,6 +91,50 @@ ArrayBuffer и бинарные массивы являются частью ECM
 
 ![Ing](https://learn.javascript.ru/article/blob/blob.svg)
 
+
+Благодаря type мы можем загружать и скачивать Blob-объекты, где type естественно становится Content-Type в сетевых запросах.
+
+Конструктор имеет следующий синтаксис:
+
+```
+new Blob(blobParts, options);
+
+```
+
+- blobParts – массив значений Blob/BufferSource/String.
+
+- options – необязательный объект с дополнительными настройками:
+
+type – тип объекта, обычно MIME-тип, например. image/png,
+
+```
+// создадим Blob из строки
+let blob = new Blob(["<html>…</html>"], {type: 'text/html'});
+// обратите внимание: первый аргумент должен быть массивом [...]
+
+```
+
+```
+// создадим Blob из типизированного массива и строк
+let hello = new Uint8Array([72, 101, 108, 108, 111]); // "hello" в бинарной форме
+
+let blob = new Blob([hello, ' ', 'world'], {type: 'text/plain'});
+
+```
+
+Мы можем получить срез Blob, используя:
+
+
+```
+blob.slice([byteStart], [byteEnd], [contentType]);
+
+
+```
+
+- byteStart – стартовая позиция байта, по умолчанию 0.
+- byteEnd – последний байт, по умолчанию до конца.
+- contentType – тип type создаваемого Blob-объекта, по умолчанию такой же, как и исходный.
+
 # File и FileReader
 
 
