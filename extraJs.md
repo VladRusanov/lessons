@@ -135,6 +135,9 @@ blob.slice([byteStart], [byteEnd], [contentType]);
 - byteEnd – последний байт, по умолчанию до конца.
 - contentType – тип type создаваемого Blob-объекта, по умолчанию такой же, как и исходный.
 
+
+**Blob не изменяем**
+
 # File и FileReader
 
 
