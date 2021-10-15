@@ -1,5 +1,5 @@
 # Liskov substitution principle
-
+```
 // class Person {
 //
 // }
@@ -78,4 +78,19 @@ function renderComponent(component) {
 
 renderComponent(new HeaderComponent())
 renderComponent(new FooterComponent())
+
+```
+
+# Blob
+
+ArrayBuffer и бинарные массивы являются частью ECMA-стандарта и, соответственно, частью JavaScript.
+
+Кроме того, в браузере имеются дополнительные высокоуровневые объекты, описанные в File API.
+
+**Объект Blob состоит из необязательной строки type (обычно MIME-тип) и blobParts – последовательности других объектов Blob, строк и BufferSource.**
+
+![Ing]https://learn.javascript.ru/article/blob/blob.svg
+
+# File и FileReader
+
 
