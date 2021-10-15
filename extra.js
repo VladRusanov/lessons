@@ -1,5 +1,5 @@
 # Liskov substitution principle
-```
+
 // class Person {
 //
 // }
@@ -79,4 +79,3 @@ function renderComponent(component) {
 renderComponent(new HeaderComponent())
 renderComponent(new FooterComponent())
 
-```
