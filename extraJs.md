@@ -140,4 +140,105 @@ blob.slice([byteStart], [byteEnd], [contentType]);
 
 # File и FileReader
 
+Объект File наследуется от объекта Blob и обладает возможностями по взаимодействию с файловой системой.
 
+Есть два способа его получить.
+
+Во-первых, есть конструктор, похожий на Blob:
+
+```
+new File(fileParts, fileName, [options])
+
+```
+
+- fileParts – массив значений Blob/BufferSource/строки.
+- fileName – имя файла, строка.
+- options – необязательный объект со свойством:
+lastModified – дата последнего изменения в формате таймстамп (целое число).
+
+Во-вторых, чаще всего мы получаем файл из <input type="file"> или через перетаскивание с помощью мыши, или из других интерфейсов браузера. В этом случае файл получает эту информацию из ОС.
+
+Так как File наследует от Blob, у объектов File есть те же свойства плюс:
+
+- name – имя файла,
+- lastModified – таймстамп для даты последнего изменения.
+
+В этом примере мы получаем объект File из <input type="file">:
+
+
+```
+<input type="file" onchange="showFile(this)">
+
+<script>
+function showFile(input) {
+  let file = input.files[0];
+
+  alert(`File name: ${file.name}`); // например, my.png
+  alert(`Last modified: ${file.lastModified}`); // например, 1552830408824
+}
+</script>
+
+```
+
+# FileReader
+
+FileReader объект, цель которого читать данные из Blob (и, следовательно, из File тоже).
+
+Данные передаются при помощи событий, так как чтение с диска может занять время.
+
+
+```
+let reader = new FileReader(); // без аргументов
+
+
+```
+Основные методы:
+
+- readAsArrayBuffer(blob) – считать данные как ArrayBuffer
+- readAsText(blob, [encoding]) – считать данные как строку (кодировка по умолчанию: utf-8)
+- readAsDataURL(blob) – считать данные как base64-кодированный URL.
+- abort() – отменить операцию.
+
+Выбор метода для чтения зависит от того, какой формат мы предпочитаем, как мы хотим далее использовать данные.
+
+- readAsArrayBuffer – для бинарных файлов, для низкоуровневой побайтовой работы с бинарными данными. Для высокоуровневых операций у File есть свои методы, унаследованные от Blob, например, slice, мы можем вызвать их напрямую.
+- readAsText – для текстовых файлов, когда мы хотим получить строку.
+- readAsDataURL – когда мы хотим использовать данные в src для img или другого тега. Есть альтернатива – можно не читать файл, а вызвать URL.createObjectURL(file).
+
+В процессе чтения происходят следующие события:
+
+- loadstart – чтение начато.
+- progress – срабатывает во время чтения данных.
+- load – нет ошибок, чтение окончено.
+- abort – вызван abort().
+- error – произошла ошибка.
+- loadend – чтение завершено (успешно или нет).
+
+Когда чтение закончено, мы сможем получить доступ к его результату следующим образом:
+
+- reader.result результат чтения (если оно успешно)
+- reader.error объект ошибки (при неудаче).
+
+```
+<input type="file" onchange="readFile(this)">
+
+<script>
+function readFile(input) {
+  let file = input.files[0];
+
+  let reader = new FileReader();
+
+  reader.readAsText(file);
+
+  reader.onload = function() {
+    console.log(reader.result);
+  };
+
+  reader.onerror = function() {
+    console.log(reader.error);
+  };
+
+}
+</script>
+
+```
